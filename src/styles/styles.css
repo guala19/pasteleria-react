@@ -1,0 +1,124 @@
+:root{
+  --bg:#FFF5E1;
+  --accent:#FFC0CB;
+  --choco:#8B4513;
+  --text:#5D4037;
+  --muted:#B0BEC5;
+}
+
+
+html,body{font-family:'Lato',sans-serif;color:var(--text);background:var(--bg)}
+h1,h2,h3{font-family:'Pacifico',cursive;color:var(--choco)}
+.brand{font-size:1.4rem}
+.brand span{color:var(--choco)}
+.boton-carrito{font-size:1.35rem}
+
+
+.card-pdt img{
+  width:100%;height:180px;object-fit:cover;
+  border-top-left-radius:.5rem;border-top-right-radius:.5rem
+}
+.precio-wrap{display:flex;flex-direction:column;gap:.25rem}
+.precio-principal{font-weight:800;color:var(--choco)}
+.btn-add{
+  display:block;width:100%;margin:0 auto;
+  background:var(--accent);color:#000;border:none;border-radius:.75rem;
+  padding:.65rem 1rem;font-weight:700;text-align:center
+}
+.btn-add:hover{filter:brightness(.95)}
+.btn-loading{position:relative;pointer-events:none;opacity:.9}
+.btn-loading .label{visibility:hidden}
+.btn-loading .spinner{position:absolute;inset:0;display:grid;place-items:center}
+
+
+.img-carrito{width:48px;height:48px;object-fit:cover;border-radius:.5rem;border:1px solid #eee}
+.zona-cantidad{display:flex;align-items:center;gap:.25rem}
+.zona-cantidad button{width:28px;height:28px;line-height:1;padding:0;border-radius:.25rem}
+
+.btn-white{background:#fff;color:#000}
+.btn-pink{background:var(--accent);color:#000;border-color:var(--accent)}
+.btn-pink:hover{filter:brightness(.95)}
+
+
+.pastillas-tamano{display:flex;gap:.5rem}
+.pastilla{
+  border:1px solid #eee;background:#fff;border-radius:.75rem;
+  padding:.5rem .9rem;font-weight:700;color:var(--choco);
+  display:inline-flex;align-items:center;gap:.5rem;cursor:pointer;
+  transition:transform .12s ease,background .12s ease,border-color .12s ease
+}
+.pastilla:hover{transform:translateY(-1px)}
+.pastilla.activa{background:var(--accent);border-color:var(--accent);color:#000}
+.pastilla .delta{font-size:.85rem;color:#000;opacity:.8}
+
+
+#acciones{transition:all .25s ease}
+.widget-cant{animation:fadeInUp .22s ease}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+
+.filtro-btn{font-weight:700;color:var(--choco);border:1px solid #eee}
+.filtro-menu{min-width:260px;border-radius:.75rem;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.check-pill{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.45rem .75rem;margin:.2rem;border-radius:.6rem;
+  background:#fdf8fb;border:1px solid #f1e6ee;cursor:pointer;font-weight:700;color:var(--choco)
+}
+.check-pill input{
+  appearance:none;width:18px;height:18px;border-radius:.35rem;border:2px solid #d9bfd0;
+  display:inline-block;position:relative;background:#fff
+}
+.check-pill input:checked{background:var(--accent);border-color:var(--accent)}
+.check-pill input:checked::after{
+  content:"";position:absolute;top:3px;left:3px;width:10px;height:10px;background:#000;border-radius:.2rem;opacity:.5
+}
+
+
+.img-box{position:relative}
+.btn-share{
+  position:absolute;right:12px;bottom:12px;
+  width:40px;height:40px;border-radius:50%;
+  background:#fff;border:1px solid #eee;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--choco);opacity:.9
+}
+.btn-share:hover{filter:brightness(.97)}
+
+
+.widget-cant{
+  display:flex;align-items:center;gap:.5rem;
+  width:auto;justify-content:center
+}
+.widget-cant .btn-inc,
+.widget-cant .btn-dec,
+.widget-cant .btn-del{
+  background:var(--accent);color:#000;border:none;border-radius:.5rem;
+  font-weight:700;width:42px;height:42px;display:flex;align-items:center;justify-content:center;cursor:pointer
+}
+.widget-cant .btn-inc:hover,
+.widget-cant .btn-dec:hover,
+.widget-cant .btn-del:hover{filter:brightness(.95)}
+.widget-cant .contador{
+  font-weight:700;color:var(--choco);
+  min-width:80px;text-align:center
+}
+.widget-cant .arrow{font-size:.85rem;margin-left:.25rem;color:var(--text)}
+
+
+.card .widget-cant{width:100%;justify-content:space-between}
+.card .widget-cant .btn-inc,
+.card .widget-cant .btn-dec,
+.card .widget-cant .btn-del{width:42px;height:42px}
+.card .widget-cant .contador{min-width:110px}
+
+
+.producto .widget-cant{justify-content:center;gap:.75rem}
+.producto .widget-cant .btn-inc,
+.producto .widget-cant .btn-dec,
+.producto .widget-cant .btn-del{width:36px;height:36px}
+.producto .widget-cant .contador{min-width:50px}
+
+
+.tab-content p {
+  color: var(--muted);
+}

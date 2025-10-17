@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { PRODUCTS, CATEGORIES } from '../data/products'
-import ProductCard from '../components/ProductCard'
+import ProductCard from '../ProductCard'
 
 export default function Catalog() {
   const [shape, setShape] = useState(new Set())

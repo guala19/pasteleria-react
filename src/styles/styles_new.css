@@ -44,3 +44,7 @@ h1, h2, h3 { font-family: 'Pacifico', cursive; color: var(--choco); }
 .img-box { position:relative; }
 .btn-share { position:absolute; right:12px; bottom:12px; width:40px; height:40px; border-radius:50%; background:#fff; border:1px solid #eee; display:flex; align-items:center; justify-content:center; color:var(--choco); opacity:.9; transition:filter .2s ease; }
 .btn-share:hover { filter:brightness(.97); }
+.navbar-brand .brand { font-weight:700; color:var(--choco); }
+.navbar .nav-link { color: #5d4037; }
+.navbar .nav-link.active { font-weight:700; }
+.card h5 { color: var(--choco); }

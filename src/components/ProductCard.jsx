@@ -1,5 +1,5 @@
-import { precioPorPersonas } from '../utils/money'
-import { useCart } from '../context/CartContext'
+import { precioPorPersonas } from './utils/money'
+import { useCart } from './context/CartContext'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 
