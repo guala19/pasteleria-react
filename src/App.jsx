@@ -4,11 +4,11 @@ import Pasteleria from "./components/Pasteleria";
 import Login from "./components/login";
 import Cuentas from "./components/Cuentas";
 import Catalogo from "./components/Catalogo";
-import Product from "./components/pages/Product";
-import Pedidos from "./components/pages/Pedidos";
-import Envios from "./components/pages/Envios";
-import Categories from "./pages/Categories.jsx";
-import CategoryView from "./pages/CategoryView.jsx";
+import Product from "./pages/Product";
+import Pedidos from "./pages/Pedidos";
+import Envios from "./pages/Envios";
+import Categories from "./pages/categorias";
+import CategoryView from "./pages/CategoryView";
 
 function App() {
   return (

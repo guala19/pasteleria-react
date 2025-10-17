@@ -1,8 +1,7 @@
 import React from "react";
 import Navbar from "./Navbar";
 import ProductCard from "./ProductCard";
-// Import correcto: PRODUCTS es un export nombrado en data/products.js
-import { PRODUCTS as products } from "./data/products";
+import { PRODUCTS as products } from "../data/products";
 
 function Catalogo() {
   return (

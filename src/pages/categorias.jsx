@@ -12,7 +12,6 @@ export default function Categories() {
 
       <section className="row g-3">
         {CATEGORIES.map((cat) => {
-          // preparar slug seguro en URL
           const slug = encodeURIComponent(cat);
           return (
             <div key={cat} className="col-12 col-sm-6 col-lg-4">

@@ -9,12 +9,11 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Redirige al catálogo después de "iniciar sesión"
-    // Puedes reemplazar esto por lógica de autenticación más adelante
+
     navigate("/catalogo");
   };
 
-  // estilo inline mínimo para asegurar que el texto sea visible (negro)
+
   const inputStyle = { color: "#000" };
 
   return (

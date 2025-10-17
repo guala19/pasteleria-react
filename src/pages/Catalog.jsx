@@ -8,7 +8,7 @@ export default function Catalog() {
   const [cats, setCats] = useState(new Set())
 
   useEffect(() => {
-    // no-op, data is static
+
   }, [])
 
   function toggle(setter, value) {
