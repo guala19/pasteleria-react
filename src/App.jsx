@@ -7,8 +7,6 @@ import Catalogo from "./components/Catalogo";
 import Product from "./components/pages/Product";
 import Pedidos from "./components/pages/Pedidos";
 import Envios from "./components/pages/Envios";
-
-// NUEVAS PÁGINAS (crear los archivos indicados más abajo)
 import Categories from "./pages/Categories.jsx";
 import CategoryView from "./pages/CategoryView.jsx";
 
