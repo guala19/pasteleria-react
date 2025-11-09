@@ -68,23 +68,39 @@ export default function Catalog() {
     );
   };
 
+  // Mapeo de forma para búsqueda en productos
+  const shapeMap = {
+    "Cuadrada": "cuadrada",
+    "Circular": "circular"
+  };
+
+  const dietaMap = {
+    "Sin Azúcar": "sin_azucar",
+    "Sin Gluten": "sin_gluten",
+    "Vegano": "vegano"
+  };
+
   // Filtrar productos
   const filteredProducts = useMemo(() => {
     return PRODUCTS.filter(product => {
-      if (forma && product.type !== forma) return false;
+      // Usar el mapeo para comparar formas (Cuadrada -> cuadrada)
+      if (forma) {
+        const mappedForma = shapeMap[forma];
+        if (product.type !== mappedForma) return false;
+      }
       if (categoria && product.category !== categoria) return false;
       if (precioMin && product.price < precioMin) return false;
       if (precioMax && product.price > precioMax) return false;
       if (dietas.length > 0) {
         const productTags = product.tags || [];
         const hasAllDietas = dietas.every(d => 
-          productTags.includes(d.toLowerCase().replace(" ", "_"))
+          productTags.includes(dietaMap[d] || d.toLowerCase().replace(" ", "_"))
         );
         if (!hasAllDietas) return false;
       }
       return true;
     });
-  }, [forma, categoria, precioMin, precioMax, dietas]);
+  }, [forma, categoria, precioMin, precioMax, dietas, shapeMap, dietaMap]);
 
   // Ordenar productos
   const sortedProducts = useMemo(() => {
@@ -113,18 +129,6 @@ export default function Catalog() {
   const DIETAS_OPTIONS = ["Sin Azúcar", "Sin Gluten", "Vegano"];
   const FORMAS_OPTIONS = ["Cuadrada", "Circular"];
   const TAMANIOS_OPTIONS = ["S", "M", "L"];
-
-  // Mapeo de forma para búsqueda en productos
-  const shapeMap = {
-    "Cuadrada": "cuadrada",
-    "Circular": "circular"
-  };
-
-  const dietaMap = {
-    "Sin Azúcar": "sin_azucar",
-    "Sin Gluten": "sin_gluten",
-    "Vegano": "vegano"
-  };
 
   return (
     <div className="catalog-redesigned">
