@@ -21,6 +21,7 @@ export default function Catalog() {
   const [disponibilidad, setDisponibilidad] = useState(searchParams.get("availability") || "");
   const [sortBy, setSortBy] = useState(searchParams.get("sort") || "relevance");
   const [personalizado, setPersonalizado] = useState(searchParams.get("custom") || "");
+  const [searchQuery, setSearchQuery] = useState(searchParams.get("q") || "");
 
   // Actualizar URL cuando cambian filtros
   const updateURL = (newParams) => {
@@ -83,24 +84,43 @@ export default function Catalog() {
   // Filtrar productos
   const filteredProducts = useMemo(() => {
     return PRODUCTS.filter(product => {
-      // Usar el mapeo para comparar formas (Cuadrada -> cuadrada)
+      // Filtro de búsqueda por texto
+      if (searchQuery) {
+        const query = searchQuery.toLowerCase();
+        const productName = product.name.toLowerCase();
+        const productDesc = product.description?.toLowerCase() || "";
+        const matchesSearch = productName.includes(query) || productDesc.includes(query);
+        if (!matchesSearch) return false;
+      }
+      
+      // Filtro de forma: Cuadrada -> cuadrada
       if (forma) {
         const mappedForma = shapeMap[forma];
         if (product.type !== mappedForma) return false;
       }
+      
+      // Filtro de categoría
       if (categoria && product.category !== categoria) return false;
+      
+      // Filtro de precio
       if (precioMin && product.price < precioMin) return false;
       if (precioMax && product.price > precioMax) return false;
+      
+      // Filtro de dietas: Sin Azúcar -> sin_azucar
       if (dietas.length > 0) {
         const productTags = product.tags || [];
-        const hasAllDietas = dietas.every(d => 
-          productTags.includes(dietaMap[d] || d.toLowerCase().replace(" ", "_"))
+        // Mapear cada dieta seleccionada a su tag equivalente
+        const mappedDietas = dietas.map(d => dietaMap[d]);
+        // Verificar que el producto tenga TODOS los tags seleccionados
+        const hasAllDietas = mappedDietas.every(diet => 
+          productTags.includes(diet)
         );
         if (!hasAllDietas) return false;
       }
+      
       return true;
     });
-  }, [forma, categoria, precioMin, precioMax, dietas, shapeMap, dietaMap]);
+  }, [forma, categoria, precioMin, precioMax, dietas, searchQuery, shapeMap, dietaMap]);
 
   // Ordenar productos
   const sortedProducts = useMemo(() => {
@@ -140,6 +160,24 @@ export default function Catalog() {
             {/* Columna izquierda: Título */}
             <div className="catalog-title-column">
               <h1 className="catalog-page-title">Catálogo</h1>
+              
+              {/* Buscador visual */}
+              {searchQuery && (
+                <div className="search-active-indicator">
+                  <span className="search-active-text">
+                    🔍 Buscando: <strong>{searchQuery}</strong>
+                  </span>
+                  <button
+                    className="search-clear-btn"
+                    onClick={() => {
+                      setSearchQuery("");
+                      setSearchParams({});
+                    }}
+                  >
+                    ✕ Limpiar
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* Columna derecha: Filtros */}
