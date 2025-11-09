@@ -84,12 +84,20 @@ export default function Catalog() {
   // Filtrar productos
   const filteredProducts = useMemo(() => {
     return PRODUCTS.filter(product => {
-      // Filtro de búsqueda por texto
-      if (searchQuery) {
-        const query = searchQuery.toLowerCase();
+      // BÚSQUEDA POR TEXTO - MÁS IMPORTANTE
+      if (searchQuery.trim()) {
+        const query = searchQuery.toLowerCase().trim();
         const productName = product.name.toLowerCase();
         const productDesc = product.description?.toLowerCase() || "";
-        const matchesSearch = productName.includes(query) || productDesc.includes(query);
+        const productCategory = product.category?.toLowerCase() || "";
+        
+        // Buscar en nombre, descripción y categoría
+        const matchesSearch = 
+          productName.includes(query) || 
+          productDesc.includes(query) || 
+          productCategory.includes(query);
+        
+        // Si hay búsqueda y NO coincide, EXCLUIR completamente
         if (!matchesSearch) return false;
       }
       
