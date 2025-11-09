@@ -42,13 +42,13 @@
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--transition);
-  display: none;
+  visibility: hidden;
 }
 
 .cart-backdrop.active {
   opacity: 1;
   pointer-events: auto;
-  display: block;
+  visibility: visible;
 }
 
 /* ============================================

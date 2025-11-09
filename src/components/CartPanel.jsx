@@ -20,12 +20,16 @@ export default function CartPanel() {
   function closeCart() { 
     const panel = document.querySelector(".cart-panel-redesigned");
     const backdrop = document.querySelector(".cart-backdrop");
-    if (panel) panel.classList.remove("active");
-    if (backdrop) backdrop.classList.remove("active");
+    if (panel) {
+      panel.classList.remove("active");
+    }
+    if (backdrop) {
+      backdrop.classList.remove("active");
+    }
   }
 
   function handleBackdropClick(e) {
-    // Solo cierra si hacen clic directamente en el backdrop, no en el panel
+    // Cierra si hacen clic en el backdrop
     if (e.target.classList.contains("cart-backdrop")) {
       closeCart();
     }
