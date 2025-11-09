@@ -14,6 +14,7 @@ import Categories from "./pages/categorias.jsx";
 
 // 🛒 Componentes CORE
 import Product from "./pages/Product.jsx";
+import ProductNew from "./pages/ProductNew.jsx";
 import EnviosTracker from "./components/EnviosTracker.jsx";
 import CartPanel from "./components/CartPanel.jsx";
 import CarritoCompraPage from "./pages/CarritoCompraPage.jsx";
@@ -70,7 +71,7 @@ export default function App() {
               <Route path="/catalogo" element={<CatalogSimple />} />
               <Route path="/categorias" element={<CategoriesNew />} />
               <Route path="/categoria/:category" element={<CategoryView />} />
-              <Route path="/producto/:code" element={<Product />} />
+              <Route path="/producto/:code" element={<ProductNew />} />
 
               {/* 🛒 Carrito / Pedidos */}
               <Route path="/carrito" element={<CarritoCompraPage />} />

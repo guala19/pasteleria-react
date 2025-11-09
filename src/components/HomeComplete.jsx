@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { PRODUCTS } from "../data/products";
+import { useCart } from "../context/CartContext";
 import "../styles/home-new.css";
 
 export default function HomeComplete() {
   const [expandedBlog, setExpandedBlog] = useState(null);
+  const { addToCart } = useCart();
 
   // 🍰 Obtener 4 productos destacados (primeros de cada categoría importante)
   const featuredProducts = [
@@ -103,7 +105,18 @@ export default function HomeComplete() {
               <div className="product-info">
                 <h3 className="product-name">{product.name}</h3>
                 <p className="product-price">${product.price.toLocaleString("es-CL")}</p>
-                <button className="btn-add-featured">
+                <button 
+                  className="btn-add-featured"
+                  onClick={() => {
+                    addToCart({
+                      code: product.code,
+                      name: product.name,
+                      price: product.price,
+                      img: product.img,
+                      quantity: 1
+                    });
+                  }}
+                >
                   <span>🛒</span> Agregar
                 </button>
               </div>
