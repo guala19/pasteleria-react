@@ -209,6 +209,14 @@
   font-weight: normal;
 }
 
+.price-details {
+  display: block;
+  font-size: 12px;
+  color: var(--gray-light);
+  margin-top: 6px;
+  font-weight: 500;
+}
+
 /* SELECTORS */
 
 .selector-section {
@@ -445,6 +453,12 @@
 .color-option:focus {
   outline: none;
   border-color: var(--chocolate);
+}
+
+.color-option.selected {
+  border-color: var(--chocolate-dark);
+  box-shadow: 0 0 0 3px var(--cream-bg),
+              0 0 0 5px var(--chocolate-dark);
 }
 
 /* DECORATION OPTIONS */

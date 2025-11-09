@@ -7,13 +7,19 @@ import "../styles/product-detail.css";
 export default function ProductNew() {
   const { code } = useParams();
   const product = useMemo(() => PRODUCTS.find(p => p.code === code), [code]);
-  const { addToCart } = useCart();
+  const { addItem } = useCart();
 
   const [selectedSize, setSelectedSize] = useState("M");
   const [quantity, setQuantity] = useState(1);
   const [mainImage, setMainImage] = useState(0);
   const [showPersonalization, setShowPersonalization] = useState(false);
   const [personalMessage, setPersonalMessage] = useState("");
+  const [creamColor, setCreamColor] = useState(null);
+  const [decorations, setDecorations] = useState({
+    fresas: false,
+    velas: false,
+    sprinkles: false
+  });
   const [addedToCart, setAddedToCart] = useState(false);
 
   if (!product) {
@@ -34,6 +40,20 @@ export default function ProductNew() {
   const sizeMultipliers = { S: 0.8, M: 1, L: 1.2 };
   const finalPrice = Math.round(product.price * sizeMultipliers[selectedSize]);
 
+  // Decoraciones y sus precios
+  const decorationPrices = {
+    fresas: 3000,
+    velas: 2000,
+    sprinkles: 1500
+  };
+
+  // Calcular precio total con decoraciones
+  const decorationCost = Object.entries(decorations).reduce((acc, [key, selected]) => {
+    return acc + (selected ? decorationPrices[key] : 0);
+  }, 0);
+
+  const totalPrice = finalPrice + decorationCost;
+
   // Imágenes (usando la misma por ahora, pero estructura para múltiples)
   const productImages = [product.img, product.img, product.img, product.img];
 
@@ -43,17 +63,31 @@ export default function ProductNew() {
   ).slice(0, 3);
 
   const handleAddToCart = () => {
-    addToCart({
+    addItem({
       code: product.code,
       name: product.name,
-      price: finalPrice,
+      price: totalPrice,
       img: product.img,
-      quantity: quantity,
+      qty: quantity,
       size: selectedSize,
-      message: personalMessage || undefined
+      // Guardar datos de personalización
+      personalization: {
+        message: personalMessage || null,
+        creamColor: creamColor || null,
+        decorations: Object.entries(decorations)
+          .filter(([_, selected]) => selected)
+          .map(([name]) => name)
+      }
     });
     setAddedToCart(true);
     setTimeout(() => setAddedToCart(false), 3000);
+  };
+
+  const handleDecorationsChange = (key) => {
+    setDecorations(prev => ({
+      ...prev,
+      [key]: !prev[key]
+    }));
   };
 
   return (
@@ -127,8 +161,13 @@ export default function ProductNew() {
           <div className="price-section">
             <span className="price-label">Precio</span>
             <h2 className="price-display">
-              ${finalPrice.toLocaleString("es-CL")}
+              ${totalPrice.toLocaleString("es-CL")}
             </h2>
+            {decorationCost > 0 && (
+              <span className="price-details">
+                Base: ${finalPrice.toLocaleString("es-CL")} + Decoraciones: ${decorationCost.toLocaleString("es-CL")}
+              </span>
+            )}
           </div>
 
           {/* Size Selector */}
@@ -209,26 +248,58 @@ export default function ProductNew() {
                 <div className="form-group">
                   <label>Color de crema</label>
                   <div className="color-options">
-                    <button className="color-option" style={{ backgroundColor: "#FFB6C1" }} title="Rosa" />
-                    <button className="color-option" style={{ backgroundColor: "#8B4513" }} title="Chocolate" />
-                    <button className="color-option" style={{ backgroundColor: "#FFFFFF" }} title="Blanco" />
-                    <button className="color-option" style={{ backgroundColor: "#F5DEB3" }} title="Vainilla" />
+                    <button 
+                      className={`color-option ${creamColor === "rosa" ? "selected" : ""}`}
+                      style={{ backgroundColor: "#FFB6C1" }} 
+                      title="Rosa"
+                      onClick={() => setCreamColor("rosa")}
+                    />
+                    <button 
+                      className={`color-option ${creamColor === "chocolate" ? "selected" : ""}`}
+                      style={{ backgroundColor: "#8B4513" }} 
+                      title="Chocolate"
+                      onClick={() => setCreamColor("chocolate")}
+                    />
+                    <button 
+                      className={`color-option ${creamColor === "blanco" ? "selected" : ""}`}
+                      style={{ backgroundColor: "#FFFFFF" }} 
+                      title="Blanco"
+                      onClick={() => setCreamColor("blanco")}
+                    />
+                    <button 
+                      className={`color-option ${creamColor === "vainilla" ? "selected" : ""}`}
+                      style={{ backgroundColor: "#F5DEB3" }} 
+                      title="Vainilla"
+                      onClick={() => setCreamColor("vainilla")}
+                    />
                   </div>
                 </div>
                 <div className="form-group">
                   <label>Decoraciones opcionales</label>
                   <div className="decoration-options">
                     <label className="decoration-checkbox">
-                      <input type="checkbox" />
-                      <span>Fresas frescas (+$3.000)</span>
+                      <input 
+                        type="checkbox" 
+                        checked={decorations.fresas}
+                        onChange={() => handleDecorationsChange("fresas")}
+                      />
+                      <span>Fresas frescas (+${decorationPrices.fresas.toLocaleString("es-CL")})</span>
                     </label>
                     <label className="decoration-checkbox">
-                      <input type="checkbox" />
-                      <span>Velas decorativas (+$2.000)</span>
+                      <input 
+                        type="checkbox" 
+                        checked={decorations.velas}
+                        onChange={() => handleDecorationsChange("velas")}
+                      />
+                      <span>Velas decorativas (+${decorationPrices.velas.toLocaleString("es-CL")})</span>
                     </label>
                     <label className="decoration-checkbox">
-                      <input type="checkbox" />
-                      <span>Sprinkles de chocolate (+$1.500)</span>
+                      <input 
+                        type="checkbox" 
+                        checked={decorations.sprinkles}
+                        onChange={() => handleDecorationsChange("sprinkles")}
+                      />
+                      <span>Sprinkles de chocolate (+${decorationPrices.sprinkles.toLocaleString("es-CL")})</span>
                     </label>
                   </div>
                 </div>
