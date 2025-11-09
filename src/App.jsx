@@ -8,6 +8,7 @@ import HomeComplete from "./components/HomeComplete.jsx";
 import Login from "./components/Login.jsx";
 import Cuentas from "./components/Cuentas.jsx";
 import CatalogSimple from "./components/CatalogSimple.jsx";
+import CategoriesNew from "./components/CategoriesNew.jsx";
 import CategoryView from "./pages/CategoryView.jsx";
 import Categories from "./pages/categorias.jsx";
 
@@ -56,8 +57,8 @@ export default function App() {
       <Navbar />
       
       {/* 🌐 Enrutamiento principal */}
-      <main className="flex-grow-1 bg-light">
-        <div className="container py-4">
+      <main className="flex-grow-1" style={{ backgroundColor: '#FFF5E1' }}>
+        <div className="container py-4" style={{ backgroundColor: '#FFF5E1' }}>
           <Suspense fallback={<div className="text-center p-5">Cargando...</div>}>
             <Routes>
               {/* Rutas base */}
@@ -67,7 +68,7 @@ export default function App() {
 
               {/* Catálogo */}
               <Route path="/catalogo" element={<CatalogSimple />} />
-              <Route path="/categorias" element={<Categories />} />
+              <Route path="/categorias" element={<CategoriesNew />} />
               <Route path="/categoria/:category" element={<CategoryView />} />
               <Route path="/producto/:code" element={<Product />} />
 
