@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "./Navbar";
 
 export default function Cuentas() {
   const [users, setUsers] = useState([]);
@@ -21,7 +20,6 @@ export default function Cuentas() {
 
   return (
     <div>
-      <Navbar />
       <main className="container my-4">
         <h2>Usuarios / Cuentas guardadas</h2>
         {users.length === 0 ? (

@@ -1,11 +1,17 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* 🎨 PALETA DE COLORES - PASTELERÍA */
+  --color-fondo: #FFF5E1;              /* Crema Pastel - Fondo Principal */
+  --color-texto-principal: #5D4037;   /* Marrón Oscuro - Textos Importantes */
+  --color-acento-1: #FFCOCB;          /* Rosa Suave - CTA Principal (Botones) */
+  --color-acento-2: #8B4513;          /* Chocolate - CTA Secundaria */
+  --color-texto-secundario: #B0BEC5;  /* Gris Claro - Textos Secundarios */
+
+  font-family: 'Lato', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--color-texto-principal);
+  background-color: var(--color-fondo);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,11 +21,11 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--color-acento-2);
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: var(--color-acento-1);
 }
 
 body {
@@ -33,38 +39,130 @@ h1 {
   line-height: 1.1;
 }
 
-/* Simple helpers for the demo */
-.cart-panel { background:#fff; border:1px solid #eee; border-radius:12px; padding:16px; }
-.precio-principal { font-weight:600; }
+/* ⭐ Helpers */
+.cart-panel { 
+  background: #fff; 
+  border: 2px solid var(--color-acento-1); 
+  border-radius: 12px; 
+  padding: 16px; 
+}
+.precio-principal { 
+  font-weight: 800; 
+  color: var(--color-acento-2);
+}
 
 button {
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
-  font-weight: 500;
+  font-weight: 600;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--color-acento-1);
+  color: #000;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: filter 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  filter: brightness(0.95);
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 3px solid var(--color-acento-2);
+  outline-offset: 2px;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+/* Tipografía */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Pacifico', cursive;
+  color: var(--color-acento-2);
+  margin-top: 0;
+}
+
+p {
+  color: var(--color-texto-principal);
+}
+
+/* 🎨 Botón Rosado - Agregar al Carrito */
+.btn-agregar {
+  background-color: var(--color-acento-1) !important;
+  border: none !important;
+  color: #000 !important;
+  font-weight: 700;
+  padding: 0.65rem 1rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-agregar:hover {
+  background-color: var(--color-acento-1) !important;
+  color: #000 !important;
+  filter: brightness(0.92);
+}
+
+.btn-agregar:active,
+.btn-agregar:focus {
+  background-color: var(--color-acento-1) !important;
+  color: #000 !important;
+  box-shadow: none !important;
+}
+
+/* Animación de pulse para el botón */
+.btn-agregar.pulse {
+  animation: buttonPulse 0.6s ease-out;
+}
+
+@keyframes buttonPulse {
+  0% {
+    transform: scale(1);
   }
-  a:hover {
-    color: #747bff;
+  50% {
+    transform: scale(0.95);
   }
-  button {
-    background-color: #f9f9f9;
+  100% {
+    transform: scale(1);
   }
+}
+
+/* 🎨 Sobrescribir Bootstrap - Botones */
+.btn-primary {
+  background-color: var(--color-acento-1) !important;
+  border-color: var(--color-acento-1) !important;
+  color: #000 !important;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-acento-1) !important;
+  border-color: var(--color-acento-1) !important;
+  color: #000 !important;
+  filter: brightness(0.95);
+}
+
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary:focus-visible {
+  background-color: var(--color-acento-1) !important;
+  border-color: var(--color-acento-1) !important;
+  color: #000 !important;
+  box-shadow: none !important;
+}
+
+.btn {
+  font-weight: 600;
+}
+
+/* Estilos globales para elementos interactivos */
+.card {
+  border: 2px solid var(--color-acento-1);
+  background-color: #fff;
+}
+
+.card h5 {
+  color: var(--color-acento-2);
+}
+
+.card-img-top {
+  border-top: 2px solid var(--color-acento-1);
 }

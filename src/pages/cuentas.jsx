@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
 
 const STORAGE_KEY = "demo_accounts_v1";
 
@@ -87,7 +86,6 @@ export default function Cuentas() {
 
   return (
     <div>
-      <Navbar />
       <main className="container my-4">
         <div className="d-flex align-items-center justify-content-between mb-3">
           <div>

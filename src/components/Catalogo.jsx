@@ -1,12 +1,10 @@
 import React from "react";
-import Navbar from "./Navbar";
 import ProductCard from "./ProductCard";
 import { PRODUCTS as products } from "../data/products";
 
 function Catalogo() {
   return (
     <div>
-      <Navbar />
       <main className="container my-3">
         <div className="p-3 bg-white rounded-3 shadow-sm mb-3">
           <h2 className="h4">Catálogo de productos</h2>

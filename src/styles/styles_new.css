@@ -1,54 +1,234 @@
-/* Copiado desde proyecto original: css/styles_new.css */
-/* Nota: si hay paths relativos a imágenes, colócalas en public/ y actualiza rutas si fuera necesario. */
-
+/* 🎨 PALETA DE COLORES FINAL - PASTELERÍA */
 :root {
+  --color-fondo: #FFF5E1;
+  --color-texto-principal: #5D4037;
+  --color-acento-1: #FFCOCB;
+  --color-acento-2: #8B4513;
+  --color-texto-secundario: #B0BEC5;
+  
+  /* Aliases para compatibilidad */
   --bg: #FFF5E1;
-  --accent: #FFC0CB;
+  --accent: #FFCOCB;
   --choco: #8B4513;
   --text: #5D4037;
   --muted: #B0BEC5;
 }
 
-html, body { font-family: 'Lato', sans-serif; color: var(--text); background: var(--bg); }
-h1, h2, h3 { font-family: 'Pacifico', cursive; color: var(--choco); }
-.brand { font-size: 1.4rem; }
-.brand span { color: var(--choco); }
+html, body {
+  font-family: 'Lato', sans-serif;
+  color: var(--color-texto-principal);
+  background: var(--color-fondo);
+  margin: 0;
+  padding: 0;
+}
 
-.btn-add { display:block; width:100%; margin:0 auto; background:var(--accent); color:#000; border:none; border-radius:0.75rem; padding:0.65rem 1rem; font-weight:700; text-align:center; transition:filter .2s ease; }
-.btn-add:hover { filter:brightness(.95); }
-.btn-white { background:#fff; color:#000; }
-.btn-pink { background:var(--accent); color:#000; border-color:var(--accent); }
-.btn-pink:hover { filter:brightness(.95); }
-.btn-user i { color:var(--choco); font-size:20px; }
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Pacifico', cursive;
+  color: var(--color-acento-2);
+}
 
-.btn-loading { position:relative; pointer-events:none; opacity:.9; }
-.btn-loading .label { visibility:hidden; }
-.btn-loading .spinner { position:absolute; inset:0; display:grid; place-items:center; }
+.brand {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-acento-2);
+}
 
-.card-pdt img { width:100%; height:180px; object-fit:cover; border-top-left-radius:.5rem; border-top-right-radius:.5rem; }
-.card-pdt strong { color:var(--choco); }
-.card { border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,.1); }
+.brand span {
+  color: var(--color-acento-2);
+}
 
-.precio-wrap { display:flex; flex-direction:column; gap:.25rem; }
-.precio-principal { font-weight:800; color:var(--choco); }
+.boton-carrito {
+  font-size: 1.35rem;
+}
 
-.img-carrito { width:48px; height:48px; object-fit:cover; border-radius:.5rem; border:1px solid #eee; }
-.zona-cantidad { display:flex; align-items:center; }
+/* ========== CARDS DE PRODUCTOS ========== */
+.card-pdt {
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  border: 2px solid var(--color-acento-1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
 
-.filtro-menu { min-width:260px; border-radius:.75rem; box-shadow:0 10px 30px rgba(0,0,0,.08); }
-.check-pill { display:inline-flex; align-items:center; gap:.5rem; padding:.45rem .75rem; margin:.2rem; border-radius:.6rem; background:#fdf8fb; border:1px solid #f1e6ee; cursor:pointer; font-weight:700; color:var(--choco); transition:background .2s ease; }
-.check-pill input { appearance:none; width:18px; height:18px; border-radius:.35rem; border:2px solid #d9bfd0; display:inline-block; position:relative; background:#fff; }
-.check-pill input:checked { background:var(--accent); border-color:var(--accent); }
-.check-pill input:checked::after { content:""; position:absolute; top:3px; left:3px; width:10px; height:10px; background:#000; border-radius:.2rem; opacity:.5; }
+.card-pdt img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
 
-.img-box { position:relative; }
-.btn-share { position:absolute; right:12px; bottom:12px; width:40px; height:40px; border-radius:50%; background:#fff; border:1px solid #eee; display:flex; align-items:center; justify-content:center; color:var(--choco); opacity:.9; transition:filter .2s ease; }
-.btn-share:hover { filter:brightness(.97); }
-.navbar-brand .brand { font-weight:700; color:var(--choco); }
-.navbar .nav-link { color: #5d4037; }
-.navbar .nav-link.active { font-weight:700; }
-.card h5 { color: var(--choco); }
-.navbar-brand .brand { font-weight:700; color:var(--choco); }
-.navbar .nav-link { color: #5d4037; }
-.navbar .nav-link.active { font-weight:700; }
-.card h5 { color: var(--choco); }
+.card-pdt strong {
+  color: var(--color-acento-2);
+}
+
+.precio-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 12px;
+}
+
+.precio-principal {
+  font-weight: 800;
+  color: var(--color-acento-2);
+}
+
+/* ========== BOTONES ========== */
+/* Los botones se definen completamente en index.css para evitar conflictos */
+/* .btn-agregar se usa en ProductCard.jsx */
+
+.btn-white {
+  background: #fff;
+  color: #000;
+}
+
+.btn-pink {
+  background: var(--color-acento-1);
+  color: #000;
+  border-color: var(--color-acento-1);
+}
+
+.btn-pink:hover {
+  filter: brightness(0.95);
+}
+
+.btn-user i {
+  color: var(--color-acento-2);
+  font-size: 20px;
+}
+
+.btn-loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.btn-loading .label {
+  visibility: hidden;
+}
+
+.btn-loading .spinner {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+/* ========== CARRITO ========== */
+.img-carrito {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  border: 1px solid #eee;
+}
+
+.zona-cantidad {
+  display: flex;
+  align-items: center;
+}
+
+/* ========== CARDS GENERALES ========== */
+.card {
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  border: 2px solid var(--color-acento-1);
+  background: #fff;
+}
+
+.card h5 {
+  color: var(--color-acento-2);
+}
+
+/* ========== FILTROS ========== */
+.filtro-menu {
+  min-width: 260px;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.check-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.75rem;
+  margin: 0.2rem;
+  border-radius: 0.6rem;
+  background: #fdf8fb;
+  border: 1px solid #f1e6ee;
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--color-texto-principal);
+  transition: background 0.2s ease;
+}
+
+.check-pill input {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 0.35rem;
+  border: 2px solid #d9bfd0;
+  display: inline-block;
+  position: relative;
+  background: #fff;
+  cursor: pointer;
+}
+
+.check-pill input:checked {
+  background: var(--color-acento-1);
+  border-color: var(--color-acento-1);
+}
+
+.check-pill input:checked::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #000;
+  font-size: 12px;
+}
+
+/* ========== COMPARTIR ========== */
+.img-box {
+  position: relative;
+}
+
+.btn-share {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-acento-2);
+  opacity: 0.9;
+  transition: filter 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-share:hover {
+  filter: brightness(0.97);
+}
+
+/* ========== NAVBAR ========== */
+.navbar-brand .brand {
+  font-weight: 700;
+  color: var(--color-acento-2);
+}
+
+.navbar .nav-link {
+  color: var(--color-texto-principal);
+  font-weight: 500;
+}
+
+.navbar .nav-link.active {
+  font-weight: 700;
+  color: var(--color-acento-1);
+}

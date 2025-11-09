@@ -1,8 +1,8 @@
 // src/components/Pasteleria.jsx
 
 import { useState } from "react";
-import Navbar from "./Navbar.jsx"; // Asumiendo que Navbar existe
-import "../styles/style.css"; // Asumiendo que existe el archivo de estilos
+import ProductSlideshow from "./ProductSlideshow";
+import "../styles/style.css";
 
 const STORAGE_KEY = "demo_accounts_v1";
 
@@ -92,9 +92,9 @@ export default function Pasteleria() {
     // 🌐 Renderizado del formulario (Diseño Responsivo con clases de Bootstrap)
     return (
         <div>
-            {/* Si tu Navbar tiene errores, coméntalo para que el formulario se muestre */}
-            <Navbar /> 
-            
+            {/* 🎬 SLIDESHOW DE PRODUCTOS */}
+            <ProductSlideshow />
+
             <main className="form-container container my-5">
                 <div className="row justify-content-center">
                     <div className="col-12 col-md-8 col-lg-6">

@@ -1,71 +1,142 @@
-import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext.jsx";
+import "../styles/navbar-professional.css";
 
-function Navbar() {
+export default function Navbar() {
   const { count } = useCart();
+  const [isSticky, setIsSticky] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsSticky(window.scrollY > 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const handleMobileMenuToggle = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  const handleMobileMenuClose = () => {
+    setMobileMenuOpen(false);
+  };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-      <div className="container">
-        <Link className="navbar-brand d-flex align-items-center gap-2" to="/">
-          <img src="/img/logoPasteleria.png" alt="logo" style={{height:36}} />
-          <span className="brand">Pastelería 1000 Sabores</span>
+    <nav className={`navbar-professional ${isSticky ? "sticky" : ""}`}>
+      <div className="navbar-container">
+        {/* Logo */}
+        <Link to="/" className="navbar-logo" onClick={handleMobileMenuClose}>
+          <img src="/img/logoPasteleria.png" alt="Pastelería Mil Sabores" className="logo-img" />
+          <span className="logo-text">Mil Sabores</span>
         </Link>
 
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#mainNavbar"
-          aria-controls="mainNavbar"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
+        {/* Desktop Navigation */}
+        <div className="navbar-menu">
+          <div className="navbar-items">
+            <NavLink to="/" className="navbar-link">
+              Inicio
+            </NavLink>
+            <NavLink to="/catalogo" className="navbar-link">
+              Catálogo
+            </NavLink>
+            <NavLink to="/categorias" className="navbar-link">
+              Categorías
+            </NavLink>
+            <NavLink to="/pedidos" className="navbar-link">
+              Pedidos
+            </NavLink>
+            <NavLink to="/envios" className="navbar-link">
+              Envíos
+            </NavLink>
+          </div>
 
-        <div className="collapse navbar-collapse" id="mainNavbar">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/">Inicio</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/catalogo">Catálogo</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/categorias">Categorías</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/pedidos">Pedidos</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/envios">Envíos</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/cuentas">Cuentas</NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/login">Login</NavLink>
-            </li>
-          </ul>
+          {/* Right section */}
+          <div className="navbar-actions">
+            <div className="search-container">
+              <input
+                type="text"
+                placeholder="Buscar..."
+                className="search-input"
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    navigate(`/catalogo?search=${e.target.value}`);
+                  }
+                }}
+              />
+              <span className="search-icon">🔍</span>
+            </div>
 
-          <div className="d-flex align-items-center">
+            <NavLink to="/cuentas" className="navbar-link auth-link">
+              👤 Cuenta
+            </NavLink>
+
             <button
-              className="btn btn-outline-secondary d-flex align-items-center"
-              type="button"
+              className="cart-button"
               data-bs-toggle="offcanvas"
               data-bs-target="#panelCarrito"
               aria-controls="panelCarrito"
             >
-              <span className="me-2" aria-hidden="true">🛒</span>
-              <span id="contadorCarrito" className="badge bg-dark text-white">{count}</span>
+              <span className="cart-icon">🛒</span>
+              {count > 0 && <span className="cart-count">{count}</span>}
             </button>
           </div>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <div className="navbar-mobile-toggle">
+          <button
+            className={`hamburger ${mobileMenuOpen ? "active" : ""}`}
+            onClick={handleMobileMenuToggle}
+            aria-label="Toggle mobile menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      <div className={`mobile-menu ${mobileMenuOpen ? "open" : ""}`}>
+        <div className="mobile-menu-content">
+          <NavLink to="/" className="mobile-link" onClick={handleMobileMenuClose}>
+            Inicio
+          </NavLink>
+          <NavLink to="/catalogo" className="mobile-link" onClick={handleMobileMenuClose}>
+            Catálogo
+          </NavLink>
+          <NavLink to="/categorias" className="mobile-link" onClick={handleMobileMenuClose}>
+            Categorías
+          </NavLink>
+          <NavLink to="/pedidos" className="mobile-link" onClick={handleMobileMenuClose}>
+            Pedidos
+          </NavLink>
+          <NavLink to="/envios" className="mobile-link" onClick={handleMobileMenuClose}>
+            Envíos
+          </NavLink>
+          <div className="mobile-search-container">
+            <input
+              type="text"
+              placeholder="Buscar..."
+              className="mobile-search-input"
+              onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  navigate(`/catalogo?search=${e.target.value}`);
+                  handleMobileMenuClose();
+                }
+              }}
+            />
+          </div>
+          <NavLink to="/cuentas" className="mobile-link auth-link" onClick={handleMobileMenuClose}>
+            👤 Mi Cuenta
+          </NavLink>
         </div>
       </div>
     </nav>
   );
 }
-
-export default Navbar;

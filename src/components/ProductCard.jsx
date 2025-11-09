@@ -5,7 +5,7 @@ import { useState } from "react";
 
 export default function ProductCard({ product }) {
   const { addItem, MONEDA } = useCart();
-  const [added, setAdded] = useState(false);
+  const [buttonRef, setButtonRef] = useState(null);
 
   const base = product.price;
   const max = product.price + 10000;
@@ -20,8 +20,14 @@ export default function ProductCard({ product }) {
       qty: 1,
       img: product.img,
     });
-    setAdded(true);
-    setTimeout(() => setAdded(false), 2000);
+
+    // Agregar animación pulse
+    if (buttonRef) {
+      buttonRef.classList.add("pulse");
+      setTimeout(() => {
+        buttonRef.classList.remove("pulse");
+      }, 600);
+    }
   }
 
   const imgSrc = product.img || "/img/cake.jpg";
@@ -44,14 +50,13 @@ export default function ProductCard({ product }) {
         </div>
         <div className="text-muted small mb-3">{product.category}</div>
         <div className="mt-auto">
-          <button className="btn btn-primary w-100" onClick={handleAdd}>
+          <button 
+            ref={setButtonRef}
+            className="btn-agregar w-100" 
+            onClick={handleAdd}
+          >
             Agregar
           </button>
-          {added && (
-            <div className="alert alert-success py-1 px-2 mt-2 mb-0 small">
-              ¡Agregado al carrito!
-            </div>
-          )}
         </div>
       </div>
     </div>

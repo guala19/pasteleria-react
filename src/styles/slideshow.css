@@ -1,0 +1,289 @@
+/* 🎬 SLIDESHOW DE PRODUCTOS */
+
+.slideshow-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.slideshow-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  background-color: var(--color-fondo);
+}
+
+.slideshow-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* ========== OVERLAY CON INFORMACIÓN ========== */
+.slideshow-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(139, 69, 19, 0.5) 100%);
+  padding: 40px 20px 20px;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.slideshow-product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.slideshow-product-name {
+  font-family: 'Pacifico', cursive;
+  font-size: 32px;
+  color: #fff;
+  margin: 0;
+  text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.8);
+  letter-spacing: 0.5px;
+}
+
+/* ========== CAJA DE PRECIO DISEÑO PREMIUM ========== */
+.slideshow-price-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, var(--color-acento-1) 0%, #ffc0d0 100%);
+  border-radius: 16px;
+  padding: 16px 24px;
+  width: fit-content;
+  box-shadow: 
+    0 8px 24px rgba(255, 192, 203, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 0 0 2px rgba(139, 69, 19, 0.3);
+  backdrop-filter: blur(10px);
+  animation: pricePulse 2s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efecto de brillo en la caja de precio */
+.slideshow-price-box::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+  animation: priceShine 3s ease-in-out infinite;
+}
+
+@keyframes priceShine {
+  0%, 100% {
+    transform: translate(-100%, -100%) rotate(0deg);
+  }
+  50% {
+    transform: translate(100%, 100%) rotate(180deg);
+  }
+}
+
+.slideshow-price {
+  font-size: 28px;
+  font-weight: 900;
+  color: #000;
+  text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.5px;
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes pricePulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 
+      0 8px 24px rgba(255, 192, 203, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6),
+      0 0 0 2px rgba(139, 69, 19, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 
+      0 12px 32px rgba(255, 192, 203, 0.8),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8),
+      0 0 0 4px rgba(139, 69, 19, 0.5);
+  }
+}
+
+/* ========== FLECHAS DE NAVEGACIÓN ========== */
+.slideshow-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: linear-gradient(135deg, var(--color-acento-1) 0%, #ffc0d0 100%);
+  color: #000;
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  font-size: 40px;
+  padding: 12px 18px;
+  cursor: pointer;
+  border-radius: 12px;
+  z-index: 10;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  box-shadow: 
+    0 8px 20px rgba(255, 192, 203, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+}
+
+.slideshow-arrow:hover {
+  background: linear-gradient(135deg, var(--color-acento-1) 0%, #ffb3c6 100%);
+  transform: translateY(-50%) scale(1.15);
+  box-shadow: 
+    0 12px 28px rgba(255, 192, 203, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 0 20px rgba(255, 192, 203, 0.8);
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
+.slideshow-arrow:active {
+  transform: translateY(-50%) scale(0.95);
+  box-shadow: 
+    0 4px 12px rgba(255, 192, 203, 0.4),
+    inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.slideshow-arrow-left {
+  left: 20px;
+}
+
+.slideshow-arrow-right {
+  right: 20px;
+}
+
+/* ========== INDICADORES (DOTS) ========== */
+.slideshow-dots {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding: 20px;
+  background: linear-gradient(to bottom, var(--color-fondo), rgba(255, 192, 203, 0.1));
+}
+
+.slideshow-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: var(--color-texto-secundario);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.slideshow-dot:hover {
+  background-color: var(--color-acento-2);
+  transform: scale(1.25);
+  box-shadow: 0 4px 12px rgba(139, 69, 19, 0.4);
+}
+
+.slideshow-dot.active {
+  background: linear-gradient(135deg, var(--color-acento-1) 0%, #ffc0d0 100%);
+  border-color: var(--color-acento-2);
+  transform: scale(1.4);
+  box-shadow: 
+    0 6px 16px rgba(255, 192, 203, 0.6),
+    0 0 0 3px rgba(255, 192, 203, 0.2);
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .slideshow-image-wrapper {
+    height: 350px;
+  }
+
+  .slideshow-product-name {
+    font-size: 24px;
+  }
+
+  .slideshow-price {
+    font-size: 24px;
+  }
+
+  .slideshow-price-box {
+    padding: 14px 20px;
+    border-radius: 14px;
+  }
+
+  .slideshow-arrow {
+    font-size: 32px;
+    padding: 10px 14px;
+    border-radius: 10px;
+  }
+
+  .slideshow-arrow-left {
+    left: 10px;
+  }
+
+  .slideshow-arrow-right {
+    right: 10px;
+  }
+
+  .slideshow-overlay {
+    padding: 30px 15px 15px;
+    min-height: 140px;
+  }
+}
+
+@media (max-width: 480px) {
+  .slideshow-image-wrapper {
+    height: 250px;
+  }
+
+  .slideshow-product-name {
+    font-size: 18px;
+  }
+
+  .slideshow-price {
+    font-size: 18px;
+  }
+
+  .slideshow-price-box {
+    padding: 12px 16px;
+    border-radius: 12px;
+    gap: 8px;
+  }
+
+  .slideshow-arrow {
+    font-size: 26px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border-width: 2px;
+  }
+
+  .slideshow-arrow-left {
+    left: 8px;
+  }
+
+  .slideshow-arrow-right {
+    right: 8px;
+  }
+
+  .slideshow-overlay {
+    padding: 20px 10px 10px;
+    min-height: 110px;
+  }
+
+  .slideshow-dots {
+    gap: 8px;
+    padding: 16px;
+  }
+
+  .slideshow-dot {
+    width: 11px;
+    height: 11px;
+  }
+}
