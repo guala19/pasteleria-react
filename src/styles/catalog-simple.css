@@ -93,7 +93,7 @@
 
 .catalog-main {
   flex: 1;
-  padding: var(--spacing-lg) 0;
+  padding: 80px var(--spacing-lg) var(--spacing-lg);
 }
 
 /* ============================================
@@ -869,7 +869,7 @@
   }
 
   .catalog-main {
-    padding: var(--spacing-xl) 0;
+    padding: 60px var(--spacing-md) var(--spacing-xl);
   }
 
   .catalog-page-title {
@@ -930,7 +930,7 @@
   }
 
   .catalog-main {
-    padding: var(--spacing-lg) 0;
+    padding: 60px var(--spacing-sm) var(--spacing-lg);
   }
 
   .catalog-header-section {

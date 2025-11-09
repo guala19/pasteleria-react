@@ -60,12 +60,12 @@ html,
 body {
   font-family: var(--font-body);
   color: var(--color-brown-dark);
-  background-color: #FFF5E1;
   scroll-behavior: smooth;
 }
 
 .home-complete {
   overflow-x: hidden;
+  background-color: #FFF5E1;
 }
 
 /* ============================================================
@@ -74,16 +74,14 @@ body {
 
 .hero-section {
   position: relative;
-  height: 100vh;
-  max-height: 800px;
+  min-height: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: #FFF5E1;
   overflow: hidden;
-  margin-top: 80px;
-  padding: var(--spacing-lg);
+  margin-top: 0;
+  padding: 80px var(--spacing-lg) var(--spacing-xxl);
 }
 
 .hero-section::before {
@@ -106,8 +104,8 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(255, 245, 225, 0.8);
   z-index: 2;
+  opacity: 0;
 }
 
 .hero-content {
@@ -115,13 +113,15 @@ body {
   z-index: 3;
   max-width: 800px;
   animation: fadeInUp 0.8s ease-out;
+  padding: 0 var(--spacing-md);
 }
 
 .hero-title {
   font-family: var(--font-display);
   font-size: var(--font-size-title);
   color: var(--color-brown-dark);
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  margin-top: 0;
   font-weight: 400;
   line-height: 1.2;
   text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.8);
@@ -131,7 +131,7 @@ body {
   font-family: var(--font-body);
   font-size: var(--font-size-subtitle);
   color: var(--color-brown-dark);
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
   font-weight: 300;
   line-height: var(--line-height-body);
 }
@@ -217,7 +217,6 @@ body {
    ============================================================ */
 
 .history-section {
-  background-color: #FFF5E1;
   padding: var(--spacing-xxl) var(--spacing-lg);
 }
 
@@ -318,7 +317,6 @@ body {
    ============================================================ */
 
 .featured-section {
-  background-color: var(--color-cream);
   padding: var(--spacing-xxl) var(--spacing-lg);
 }
 
@@ -473,7 +471,6 @@ body {
    ============================================================ */
 
 .promotions-section {
-  background: linear-gradient(135deg, #ffe3e3 0%, #fff0f0 100%);
   padding: var(--spacing-xxl) var(--spacing-lg);
 }
 
@@ -557,7 +554,6 @@ body {
    ============================================================ */
 
 .community-section {
-  background-color: var(--color-cream);
   padding: var(--spacing-xxl) var(--spacing-lg);
 }
 
@@ -852,9 +848,9 @@ body {
 
   .hero-section {
     height: auto;
-    min-height: 600px;
-    margin-top: 60px;
-    padding: var(--spacing-md);
+    min-height: 400px;
+    margin-top: 0;
+    padding: 60px var(--spacing-md) var(--spacing-lg);
   }
 
   .hero-title {
@@ -956,6 +952,11 @@ body {
 
 /* Extra small (up to 480px) */
 @media (max-width: 480px) {
+  .hero-section {
+    min-height: 300px;
+    padding: 60px var(--spacing-sm) var(--spacing-lg);
+  }
+
   .hero-title {
     font-size: 1.5rem;
   }

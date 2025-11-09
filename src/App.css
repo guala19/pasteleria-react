@@ -3,24 +3,24 @@
   margin: 0;
   padding: 0;
   background-color: #FFF5E1;
+  min-height: 100vh;
+}
+
+html, body {
+  background-color: #FFF5E1;
+  margin: 0;
+  padding: 0;
 }
 
 .app-root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  padding-top: 80px;
   background-color: #FFF5E1;
 }
 
 .app-root main {
   flex: 1;
-}
-
-@media (max-width: 768px) {
-  .app-root {
-    padding-top: 60px;
-  }
 }
 
 .read-the-docs {
