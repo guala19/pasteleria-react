@@ -50,11 +50,10 @@ export default function HomeComplete() {
         <div className="hero-content">
           <h1 className="hero-title">50 años endulzando momentos inolvidables 🍰</h1>
           <p className="hero-subtitle">Descubre nuestras tortas artesanales y celebra con nosotros</p>
-          <div className="hero-buttons">
-            <Link to="/catalogo" className="btn btn-primary btn-lg">
+                    <div className="hero-buttons">
+            <Link to="/catalogo" className="btn btn-catalog-coffee btn-lg">
               Ver catálogo
             </Link>
-            <button className="btn btn-secondary btn-lg">Personaliza tu torta</button>
           </div>
         </div>
       </section>

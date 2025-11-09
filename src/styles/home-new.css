@@ -60,7 +60,7 @@ html,
 body {
   font-family: var(--font-body);
   color: var(--color-brown-dark);
-  background-color: var(--color-white);
+  background-color: #FFF5E1;
   scroll-behavior: smooth;
 }
 
@@ -80,7 +80,7 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: linear-gradient(135deg, #f5e6d3 0%, #e8d4c4 100%);
+  background: #FFF5E1;
   overflow: hidden;
   margin-top: 80px;
   padding: var(--spacing-lg);
@@ -93,10 +93,10 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url("/img/cake.jpg");
+  background-image: none;
   background-size: cover;
   background-position: center;
-  opacity: 0.4;
+  opacity: 0;
   z-index: 1;
 }
 
@@ -182,6 +182,20 @@ body {
   box-shadow: var(--shadow-lg);
 }
 
+.btn-catalog-coffee {
+  background-color: var(--color-chocolate);
+  color: var(--color-white);
+  display: block;
+  margin: 0 auto;
+  width: fit-content;
+}
+
+.btn-catalog-coffee:hover {
+  background-color: #704214;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
 .btn-lg {
   padding: 1rem 2.5rem;
   font-size: 1.1rem;
@@ -203,7 +217,7 @@ body {
    ============================================================ */
 
 .history-section {
-  background-color: #fff0d6;
+  background-color: #FFF5E1;
   padding: var(--spacing-xxl) var(--spacing-lg);
 }
 
@@ -346,7 +360,7 @@ body {
   position: relative;
   overflow: hidden;
   aspect-ratio: 1;
-  background-color: #f9f9f9;
+  background-color: #FFF5E1;
 }
 
 .product-image {
