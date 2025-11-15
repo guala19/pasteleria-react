@@ -1,0 +1,495 @@
+/* ==================== LOGIN PAGE - MINIMALISTA Y ELEGANTE ==================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.login-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  min-height: 100vh;
+  background-color: #FAF7F2; /* Crema Pálido */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 2rem;
+  z-index: 9999;
+}
+
+.login-wrapper {
+  width: 100%;
+  max-width: 420px;
+  animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==================== BOTÓN DE RETROCESO ==================== */
+
+.login-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  color: #8B4513; /* Marrón Chocolate */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 2rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}
+
+.login-back-btn:hover {
+  background-color: rgba(139, 69, 19, 0.08);
+  transform: translateX(-2px);
+}
+
+.login-back-btn:active {
+  transform: translateX(0);
+}
+
+/* ==================== LOGO ==================== */
+
+.login-logo {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.login-logo-icon {
+  font-size: 3rem;
+  display: inline-block;
+}
+
+/* ==================== TÍTULO ==================== */
+
+.login-title {
+  font-family: 'Georgia', 'Garamond', serif;
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: #8B4513; /* Marrón Chocolate */
+  text-align: center;
+  margin-bottom: 2rem;
+  letter-spacing: -0.5px;
+}
+
+/* ==================== ERROR MESSAGE ==================== */
+
+.login-error {
+  background-color: #fff0f0;
+  border-left: 4px solid #c44444;
+  color: #8B4513;
+  padding: 0.875rem 1rem;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  animation: shake 0.4s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+/* ==================== FORMULARIO ==================== */
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Input Group */
+.login-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Label */
+.login-label {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #8B4513; /* Marrón Chocolate */
+  text-transform: capitalize;
+}
+
+/* Input */
+.login-input {
+  padding: 0.875rem 1rem;
+  border: 1px solid #8B4513;
+  border-radius: 6px;
+  background-color: #FFFFFF;
+  color: #8B4513;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.login-input:focus {
+  outline: none;
+  border-width: 2px;
+  border-color: #D4AF37;
+  background-color: #FFFBF5;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+}
+
+.login-input:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.login-input::placeholder {
+  color: #d9b59f;
+}
+
+/* Password Wrapper */
+.login-password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.login-password-wrapper .login-input {
+  padding-right: 2.75rem;
+  width: 100%;
+}
+
+/* Toggle Password Button */
+.login-toggle-password {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: transform 0.2s ease;
+  color: #8B4513;
+}
+
+.login-toggle-password:hover {
+  transform: translateY(-50%) scale(1.15);
+}
+
+.login-toggle-password:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* ==================== FORGOT PASSWORD LINK ==================== */
+
+.login-forgot-password {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 0.85rem;
+  color: #8B4513;
+  text-decoration: none;
+  align-self: flex-end;
+  transition: color 0.2s ease;
+  margin-top: -0.75rem;
+}
+
+.login-forgot-password:hover {
+  color: #D4AF37;
+  text-decoration: underline;
+}
+
+/* ==================== BOTÓN PRINCIPAL ==================== */
+
+.login-btn {
+  padding: 0.95rem;
+  background-color: #8B4513; /* Marrón Chocolate */
+  color: #FFF5E1; /* Crema */
+  border: none;
+  border-radius: 6px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.3px;
+  margin-top: 0.5rem;
+}
+
+.login-btn:hover:not(:disabled) {
+  background-color: #6d3510;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(139, 69, 19, 0.25);
+}
+
+.login-btn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(139, 69, 19, 0.15);
+}
+
+.login-btn:disabled {
+  background-color: #a0663d;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* ==================== REGISTER LINK ==================== */
+
+.login-register {
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 0.9rem;
+  color: #8B4513;
+  margin-bottom: 2rem;
+}
+
+.login-register-link {
+  color: #8B4513;
+  text-decoration: none;
+  font-weight: 700;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.login-register-link:hover {
+  border-bottom-color: #8B4513;
+  color: #D4AF37;
+}
+
+/* ==================== DEMO CREDENTIALS ==================== */
+
+.login-demo {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #EDE7DC;
+}
+
+.login-demo details {
+  cursor: pointer;
+}
+
+.login-demo summary {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 0.85rem;
+  color: #8B4513;
+  font-weight: 600;
+  user-select: none;
+  transition: color 0.2s ease;
+}
+
+.login-demo summary:hover {
+  color: #D4AF37;
+}
+
+.login-demo-content {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.demo-item {
+  background-color: #FFFBF5;
+  padding: 0.875rem;
+  border-radius: 4px;
+  border-left: 3px solid #D4AF37;
+}
+
+.demo-item p {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 0.85rem;
+  color: #8B4513;
+  margin: 0.25rem 0;
+}
+
+.demo-item strong {
+  font-weight: 700;
+  color: #8B4513;
+}
+
+.demo-item code {
+  background-color: #f0e8e0;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  color: #6d3510;
+}
+
+/* ==================== RESPONSIVO ==================== */
+
+@media (max-width: 768px) {
+  .login-container {
+    padding: 1rem;
+  }
+
+  .login-wrapper {
+    max-width: 100%;
+  }
+
+  .login-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .login-logo-icon {
+    font-size: 2.5rem;
+  }
+
+  .login-form {
+    gap: 1.25rem;
+  }
+
+  .login-input {
+    padding: 0.75rem 0.875rem;
+    font-size: 16px; /* Previene zoom en iOS */
+  }
+
+  .login-label {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    padding: 1rem 0.5rem;
+  }
+
+  .login-title {
+    font-size: 1.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .login-logo-icon {
+    font-size: 2rem;
+  }
+
+  .login-wrapper {
+    max-width: 100%;
+  }
+
+  .login-form {
+    gap: 1rem;
+  }
+
+  .login-label {
+    font-size: 0.85rem;
+  }
+
+  .login-input {
+    padding: 0.7rem 0.75rem;
+  }
+
+  .demo-item {
+    padding: 0.75rem;
+  }
+
+  .demo-item p {
+    font-size: 0.8rem;
+  }
+}
+
+/* ==================== ACCESIBILIDAD ==================== */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus visible para navegación por teclado */
+.login-input:focus-visible,
+.login-btn:focus-visible,
+.login-toggle-password:focus-visible,
+.login-forgot-password:focus-visible {
+  outline: 2px solid #D4AF37;
+  outline-offset: 2px;
+}
+
+/* ==================== REGISTRO PAGE SPECIFIC STYLES ==================== */
+
+.registro-subtitle {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 0.95rem;
+  color: #C9A97A; /* Marrón Claro */
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: 500;
+}
+
+.registro-success {
+  background-color: #f0f5f0;
+  border-left: 4px solid #4caf50;
+  color: #2e7d32;
+  padding: 0.875rem 1rem;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.registro-terms {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 0.8rem;
+  color: #C9A97A; /* Marrón Claro */
+  text-align: center;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+/* Estilos para el botón de registro */
+.login-btn:not(:disabled):active {
+  box-shadow: inset 0 2px 4px rgba(139, 69, 19, 0.2);
+}

@@ -1,0 +1,238 @@
+/* =============================================
+   ADMIN SIDEBAR - PASTELERÍA MIL SABORES
+   Navegación principal con paleta artesanal
+   ============================================= */
+
+:root {
+  --admin-brown-chocolate: #8B4513;
+  --admin-brown-dark: #5D4037;
+  --admin-cream: #FFF5E1;
+  --admin-beige-light: #F5E6D3;
+  --admin-beige-card: #EDE7DC;
+  --admin-gold: #D4AF37;
+  --admin-text-primary: #5D4037;
+  
+  --admin-transition: 0.3s ease-in-out;
+  --admin-radius: 8px;
+  --admin-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* =============================================
+   SIDEBAR - Contenedor Principal
+   ============================================= */
+
+.admin-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 260px;
+  height: 100vh;
+  background-color: var(--admin-brown-chocolate);
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 0;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
+}
+
+/* =============================================
+   LOGO - Parte Superior
+   ============================================= */
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1.5rem 2rem;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo-circle {
+  width: 48px;
+  height: 48px;
+  background-color: var(--admin-cream);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.logo-title {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--admin-cream);
+  line-height: 1;
+}
+
+.logo-subtitle {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--admin-gold);
+  line-height: 1;
+  letter-spacing: 0.5px;
+}
+
+/* =============================================
+   NAVEGACIÓN - Lista de Enlaces
+   ============================================= */
+
+.sidebar-nav {
+  flex: 1;
+  padding: 1rem 0;
+}
+
+.nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-item {
+  margin: 0.25rem 0;
+  transition: background-color var(--admin-transition);
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  color: var(--admin-cream);
+  text-decoration: none;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all var(--admin-transition);
+  border-left: 3px solid transparent;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding-left: 1.75rem;
+}
+
+.nav-icon {
+  font-size: 1.25rem;
+  width: 24px;
+  text-align: center;
+}
+
+.nav-label {
+  flex: 1;
+}
+
+/* =============================================
+   ESTADO ACTIVO - Enlace Actual
+   ============================================= */
+
+.nav-item.active .nav-link {
+  color: var(--admin-gold);
+  background-color: rgba(245, 230, 211, 0.08);
+  border-left-color: var(--admin-gold);
+  padding-left: 1.75rem;
+  font-weight: 600;
+}
+
+.nav-item.active .nav-icon {
+  filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.3));
+}
+
+/* =============================================
+   FOOTER - Versión
+   ============================================= */
+
+.sidebar-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.version {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.75rem;
+  color: rgba(255, 245, 225, 0.6);
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+/* =============================================
+   RESPONSIVE - Mobile
+   ============================================= */
+
+@media (max-width: 768px) {
+  .admin-sidebar {
+    width: 220px;
+    padding: 1.5rem 0;
+  }
+
+  .sidebar-logo {
+    padding: 0 1rem 1.5rem;
+  }
+
+  .nav-link {
+    padding: 0.65rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .nav-link:hover {
+    padding-left: 1.25rem;
+  }
+
+  .nav-item.active .nav-link {
+    padding-left: 1.25rem;
+  }
+
+  .logo-title {
+    font-size: 0.8rem;
+  }
+
+  .logo-subtitle {
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .admin-sidebar {
+    width: 200px;
+  }
+
+  .logo-text {
+    display: none;
+  }
+
+  .sidebar-logo {
+    justify-content: center;
+    padding-bottom: 1rem;
+  }
+
+  .logo-circle {
+    width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
+  }
+
+  .nav-link {
+    padding: 0.6rem 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .nav-label {
+    display: none;
+  }
+
+  .nav-icon {
+    width: 100%;
+    text-align: center;
+  }
+}

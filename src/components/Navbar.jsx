@@ -1,142 +1,201 @@
-import React, { useState, useEffect } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useCart } from "../context/CartContext.jsx";
-import "../styles/navbar-professional.css";
+import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useCart } from '../context/CartContext.jsx';
+import LoginPopover from './LoginPopover.jsx';
+import '../styles/navbar.css';
 
 export default function Navbar() {
-  const { count } = useCart();
-  const [isSticky, setIsSticky] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const { cart } = useCart();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const cartBtnRef = useRef(null);
+  const [prevCartCount, setPrevCartCount] = useState(0);
 
+  // Calcular cantidad total de artículos en el carrito
+  const cartCount = cart ? cart.reduce((sum, item) => sum + (item.quantity || 0), 0) : 0;
+
+  // Disparar animación cuando el carrito se actualiza
   useEffect(() => {
-    const handleScroll = () => {
-      setIsSticky(window.scrollY > 0);
-    };
+    if (cartCount > prevCartCount && cartBtnRef.current) {
+      cartBtnRef.current.classList.remove('shake-animation');
+      // Forzar reflow para reiniciar la animación
+      void cartBtnRef.current.offsetWidth;
+      cartBtnRef.current.classList.add('shake-animation');
+    }
+    setPrevCartCount(cartCount);
+  }, [cartCount, prevCartCount]);
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const handleMobileMenuToggle = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
+  // Función para detectar si un link está activo
+  const isLinkActive = (path) => {
+    if (path === '/catalogo') {
+      return location.pathname === '/catalogo' || location.pathname.startsWith('/catalogo');
+    }
+    return location.pathname === path;
   };
 
-  const handleMobileMenuClose = () => {
-    setMobileMenuOpen(false);
+  // Cerrar menú móvil al navegar
+  const handleNavigation = (path) => {
+    navigate(path);
+    setIsMobileMenuOpen(false);
+  };
+
+  // Abrir/cerrar carrito
+  const handleCartClick = () => {
+    const panel = document.querySelector('.cart-panel-redesigned');
+    const backdrop = document.querySelector('.cart-backdrop');
+    if (panel) panel.classList.add('active');
+    if (backdrop) backdrop.classList.add('active');
+    setIsMobileMenuOpen(false);
+  };
+
+  // Manejo de búsqueda
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/catalogo?search=${encodeURIComponent(searchQuery)}`);
+      setSearchQuery('');
+      setIsSearchOpen(false);
+      setIsMobileMenuOpen(false);
+    }
   };
 
   return (
-    <nav className={`navbar-professional ${isSticky ? "sticky" : ""}`}>
+    <nav className="navbar-professional">
       <div className="navbar-container">
-        {/* Logo */}
-        <Link to="/" className="navbar-logo" onClick={handleMobileMenuClose}>
-          <img src="/img/logoPasteleria.png" alt="Pastelería Mil Sabores" className="logo-img" />
-          <span className="logo-text">Mil Sabores</span>
-        </Link>
-
-        {/* Desktop Navigation */}
-        <div className="navbar-menu">
-          <div className="navbar-items">
-            <NavLink to="/" className="navbar-link">
-              Inicio
-            </NavLink>
-            <NavLink to="/catalogo" className="navbar-link">
-              Catálogo
-            </NavLink>
-            <NavLink to="/categorias" className="navbar-link">
-              Categorías
-            </NavLink>
-            <NavLink to="/pedidos" className="navbar-link">
-              Pedidos
-            </NavLink>
-            <NavLink to="/envios" className="navbar-link">
-              Envíos
-            </NavLink>
-          </div>
-
-          {/* Right section */}
-          <div className="navbar-actions">
-            <div className="search-container">
-              <input
-                type="text"
-                placeholder="Buscar..."
-                className="search-input"
-                onKeyPress={(e) => {
-                  if (e.key === "Enter") {
-                    navigate(`/catalogo?search=${e.target.value}`);
-                  }
-                }}
-              />
-              <span className="search-icon">🔍</span>
-            </div>
-
-            <NavLink to="/cuentas" className="navbar-link auth-link">
-              👤 Cuenta
-            </NavLink>
-
-            <button
-              className="cart-button"
-              data-bs-toggle="offcanvas"
-              data-bs-target="#panelCarrito"
-              aria-controls="panelCarrito"
-            >
-              <span className="cart-icon">🛒</span>
-              {count > 0 && <span className="cart-count">{count}</span>}
-            </button>
-          </div>
+        <div className="navbar-left">
+          <a href="/" className="navbar-logo">
+            <span className="navbar-logo-icon">🥐</span>
+            <span className="navbar-logo-text">Mil Sabores</span>
+          </a>
         </div>
 
-        {/* Mobile Menu Button */}
-        <div className="navbar-mobile-toggle">
+        <div className="navbar-center">
+          <a href="/catalogo" className={`navbar-link ${isLinkActive('/catalogo') ? 'active' : ''}`}>Categorías</a>
+          <a href="/blog" className={`navbar-link ${isLinkActive('/blog') ? 'active' : ''}`}>Blog</a>
+          <a href="/historia" className={`navbar-link ${isLinkActive('/historia') ? 'active' : ''}`}>Nuestra Historia</a>
+          <a href="/contacto" className={`navbar-link ${isLinkActive('/contacto') ? 'active' : ''}`}>Contacto</a>
+        </div>
+
+        <div className="navbar-right">
+          {/* Icono de Búsqueda */}
+          <div className="navbar-search-container">
+            <button
+              className="navbar-icon-btn search-btn"
+              title="Buscar"
+              onClick={() => setIsSearchOpen(!isSearchOpen)}
+            >
+              🔍
+            </button>
+
+            {/* Barra de búsqueda desplegable */}
+            {isSearchOpen && (
+              <form className="navbar-search-bar" onSubmit={handleSearch}>
+                <input
+                  type="text"
+                  className="navbar-search-input"
+                  placeholder="Buscar productos..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  autoFocus
+                />
+                <button type="submit" className="navbar-search-submit">Buscar</button>
+              </form>
+            )}
+          </div>
+
+          {/* Icono de Perfil con Popover */}
+          <LoginPopover />
+
+          {/* Icono de Carrito */}
           <button
-            className={`hamburger ${mobileMenuOpen ? "active" : ""}`}
-            onClick={handleMobileMenuToggle}
-            aria-label="Toggle mobile menu"
+            ref={cartBtnRef}
+            className="navbar-icon-btn cart-btn"
+            title="Carrito de Compras"
+            onClick={handleCartClick}
           >
-            <span></span>
-            <span></span>
-            <span></span>
+            🛒
+            {cartCount > 0 && (
+              <span className="navbar-badge">{cartCount}</span>
+            )}
+          </button>
+
+          {/* Icono de Menú Hamburguesa (Mobile) */}
+          <button
+            className="navbar-hamburger"
+            title="Menú"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            <span className="hamburger-line"></span>
+            <span className="hamburger-line"></span>
+            <span className="hamburger-line"></span>
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      <div className={`mobile-menu ${mobileMenuOpen ? "open" : ""}`}>
-        <div className="mobile-menu-content">
-          <NavLink to="/" className="mobile-link" onClick={handleMobileMenuClose}>
-            Inicio
-          </NavLink>
-          <NavLink to="/catalogo" className="mobile-link" onClick={handleMobileMenuClose}>
-            Catálogo
-          </NavLink>
-          <NavLink to="/categorias" className="mobile-link" onClick={handleMobileMenuClose}>
-            Categorías
-          </NavLink>
-          <NavLink to="/pedidos" className="mobile-link" onClick={handleMobileMenuClose}>
-            Pedidos
-          </NavLink>
-          <NavLink to="/envios" className="mobile-link" onClick={handleMobileMenuClose}>
-            Envíos
-          </NavLink>
-          <div className="mobile-search-container">
-            <input
-              type="text"
-              placeholder="Buscar..."
-              className="mobile-search-input"
-              onKeyPress={(e) => {
-                if (e.key === "Enter") {
-                  navigate(`/catalogo?search=${e.target.value}`);
-                  handleMobileMenuClose();
-                }
-              }}
-            />
+      {/* ==================== MENÚ MÓVIL (Sidebar) ==================== */}
+      {isMobileMenuOpen && (
+        <>
+          <div
+            className="navbar-mobile-backdrop"
+            onClick={() => setIsMobileMenuOpen(false)}
+          ></div>
+
+          <div className="navbar-mobile-menu">
+            {/* Header del menú */}
+            <div className="navbar-mobile-header">
+              <h3>Menú</h3>
+              <button
+                className="navbar-mobile-close"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Enlaces del menú */}
+            <div className="navbar-mobile-links">
+              <a href="/catalogo" className={`navbar-mobile-link ${isLinkActive('/catalogo') ? 'active' : ''}`} onClick={() => handleNavigation('/catalogo')}>
+                Categorías
+              </a>
+              <a href="/blog" className={`navbar-mobile-link ${isLinkActive('/blog') ? 'active' : ''}`} onClick={() => handleNavigation('/blog')}>
+                Blog
+              </a>
+              <a href="/historia" className={`navbar-mobile-link ${isLinkActive('/historia') ? 'active' : ''}`} onClick={() => handleNavigation('/historia')}>
+                Nuestra Historia
+              </a>
+              <a href="/contacto" className={`navbar-mobile-link ${isLinkActive('/contacto') ? 'active' : ''}`} onClick={() => handleNavigation('/contacto')}>
+                Contacto
+              </a>
+
+              <hr className="navbar-mobile-divider" />
+
+              <a 
+                href="/login"
+                className="navbar-mobile-link" 
+                onClick={() => handleNavigation('/login')}
+              >
+                Iniciar Sesión
+              </a>
+
+              <div className="navbar-mobile-search">
+                <form onSubmit={handleSearch}>
+                  <input
+                    type="text"
+                    className="navbar-mobile-search-input"
+                    placeholder="Buscar..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
+                  <button type="submit" className="navbar-mobile-search-btn">Buscar</button>
+                </form>
+              </div>
+            </div>
           </div>
-          <NavLink to="/cuentas" className="mobile-link auth-link" onClick={handleMobileMenuClose}>
-            👤 Mi Cuenta
-          </NavLink>
-        </div>
-      </div>
+        </>
+      )}
     </nav>
   );
 }

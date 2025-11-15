@@ -1,0 +1,215 @@
+/**
+ * Nuestra Historia Styles
+ * 
+ * Diseño editorial limpio y elegante que cuenta la historia de Mil Sabores.
+ * Paleta: Crema Pálido (#FAF7F2), Marrón Chocolate (#8B4513), Dorado Opaco (#D4AF37)
+ */
+
+/* ========================
+   PÁGINA GENERAL
+   ======================== */
+
+.nuestra-historia-page {
+  background-color: #FAF7F2; /* Crema Pálido */
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+/* ========================
+   CONTENEDOR PRINCIPAL
+   ======================== */
+
+.historia-container {
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  line-height: 1.6;
+}
+
+/* ========================
+   HEADER DE LA HISTORIA
+   ======================== */
+
+.historia-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid #E8DDD0;
+}
+
+.historia-title {
+  font-family: 'Georgia', 'Garamond', serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #8B4513; /* Marrón Chocolate */
+  margin: 0;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.historia-subtitle {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #A0704D; /* Marrón Claro */
+  margin: 0.75rem 0 0 0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ========================
+   CONTENIDO EDITORIAL
+   ======================== */
+
+.historia-content {
+  margin: 3rem 0;
+}
+
+.historia-paragraph {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #8B4513; /* Marrón Chocolate */
+  margin: 0 0 2rem 0;
+  text-align: justify;
+  letter-spacing: 0.3px;
+}
+
+.historia-paragraph:first-of-type {
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.9;
+}
+
+/* ========================
+   BLOQUE DE CITA
+   ======================== */
+
+.historia-quote {
+  border-left: 4px solid #D4AF37; /* Dorado Opaco */
+  padding-left: 2rem;
+  margin: 3rem 0;
+  font-style: italic;
+}
+
+.quote-text {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #8B4513; /* Marrón Chocolate */
+  margin: 0 0 1rem 0;
+  font-style: italic;
+  letter-spacing: 0.2px;
+}
+
+.quote-author {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 0.9rem;
+  color: #A0704D; /* Marrón Claro */
+  margin: 0;
+  font-style: normal;
+  font-weight: 600;
+}
+
+/* ========================
+   RESPONSIVE
+   ======================== */
+
+@media (max-width: 768px) {
+  .historia-container {
+    max-width: 100%;
+    padding: 2rem 1.5rem;
+  }
+
+  .historia-title {
+    font-size: 2.2rem;
+  }
+
+  .historia-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .historia-paragraph {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    text-align: left;
+  }
+
+  .historia-paragraph:first-of-type {
+    font-size: 1rem;
+  }
+
+  .quote-text {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .historia-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .historia-title {
+    font-size: 1.8rem;
+  }
+
+  .historia-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .historia-paragraph {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .historia-quote {
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .quote-text {
+    font-size: 0.95rem;
+  }
+}
+
+/* ========================
+   ANIMACIONES
+   ======================== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.historia-container {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* ========================
+   TEMA OSCURO (OPCIONAL)
+   ======================== */
+
+@media (prefers-color-scheme: dark) {
+  .nuestra-historia-page {
+    background-color: #1a1410;
+  }
+
+  .historia-paragraph,
+  .quote-text,
+  .historia-title {
+    color: #E8DDD0;
+  }
+
+  .historia-subtitle,
+  .quote-author {
+    color: #C9A97A;
+  }
+}

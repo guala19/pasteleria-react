@@ -1,61 +1,50 @@
-import { precioPorPersonas } from "../utils/money";
-import { useCart } from "../context/CartContext";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useCart } from '../context/CartContext.jsx';
+import '../styles/product-card.css';
 
-export default function ProductCard({ product }) {
-  const { addItem, MONEDA } = useCart();
-  const [buttonRef, setButtonRef] = useState(null);
+export default function ProductCard({ product, className = '' }) {
+  const navigate = useNavigate();
+  const { addToCart } = useCart();
 
-  const base = product.price;
-  const max = product.price + 10000;
-
-  function handleAdd() {
-    addItem({
+  const handleAddToCart = () => {
+    addToCart({
       code: product.code,
       name: product.name,
-      type: product.type,
-      size: "10 personas",
-      price: precioPorPersonas(product.price, "10p"),
-      qty: 1,
+      price: product.price,
       img: product.img,
+      quantity: 1
     });
+  };
 
-    // Agregar animación pulse
-    if (buttonRef) {
-      buttonRef.classList.add("pulse");
-      setTimeout(() => {
-        buttonRef.classList.remove("pulse");
-      }, 600);
-    }
-  }
-
-  const imgSrc = product.img || "/img/cake.jpg";
+  const handleProductClick = () => {
+    navigate(`/producto/${product.code}`);
+  };
 
   return (
-    <div className="card h-100">
-      <Link to={`/producto/${product.code}`} className="text-decoration-none">
-        <img src={imgSrc} alt={product.name} className="card-img-top" />
-      </Link>
-      <div className="card-body d-flex flex-column">
-        <div>
-          <Link className="text-decoration-none" to={`/producto/${product.code}`}>
-            <strong>{product.name}</strong>
-          </Link>
-        </div>
-        <div className="precio-wrap my-2">
-          <div className="precio-principal">
-            {MONEDA.format(base)} — {MONEDA.format(max)}
-          </div>
-        </div>
-        <div className="text-muted small mb-3">{product.category}</div>
-        <div className="mt-auto">
+    <div className={`product-card ${className}`}>
+      {/* Imagen del producto */}
+      <div className="product-card-image" onClick={handleProductClick} style={{ cursor: 'pointer' }}>
+        <img src={product.img} alt={product.name} />
+      </div>
+
+      {/* Contenido de la tarjeta */}
+      <div className="product-card-content">
+        {/* Nombre del producto */}
+        <h3 className="product-card-name">{product.name}</h3>
+
+        {/* Descripción corta */}
+        <p className="product-card-description">{product.description}</p>
+
+        {/* Fila de acción: Precio y Botón */}
+        <div className="product-card-footer">
+          <span className="product-card-price">${product.price.toLocaleString('es-CL')}</span>
           <button 
-            ref={setButtonRef}
-            className="btn-agregar w-100" 
-            onClick={handleAdd}
+            className="product-card-button"
+            onClick={handleAddToCart}
+            title="Agregar al carrito"
           >
-            Agregar
+            🛒 Agregar
           </button>
         </div>
       </div>

@@ -1,0 +1,85 @@
+/* ============================================
+   RECOMMENDED SECTION - "Recomendados para Ti"
+   ============================================ */
+
+.recommended-section {
+  background-color: #FFF5E1;
+  padding: 4rem 2rem;
+  width: 100%;
+}
+
+.recommended-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Título de la Sección */
+.recommended-title {
+  font-family: 'Pacifico', cursive;
+  font-size: 3rem;
+  font-weight: 400;
+  color: #5D4037;
+  text-align: center;
+  margin-bottom: 3rem;
+  letter-spacing: 0.5px;
+}
+
+/* Cuadrícula de Productos */
+.recommended-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  width: 100%;
+}
+
+/* En escritorio: mostrar 4 columnas */
+@media (min-width: 1200px) {
+  .recommended-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* En tablet: mostrar 2 columnas */
+@media (max-width: 1024px) and (min-width: 768px) {
+  .recommended-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* En móvil: mostrar 1 columna */
+@media (max-width: 767px) {
+  .recommended-section {
+    padding: 2.5rem 1rem;
+  }
+
+  .recommended-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .recommended-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* Animación de entrada (opcional) */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.recommended-product-card {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.recommended-product-card:nth-child(1) { animation-delay: 0.1s; }
+.recommended-product-card:nth-child(2) { animation-delay: 0.2s; }
+.recommended-product-card:nth-child(3) { animation-delay: 0.3s; }
+.recommended-product-card:nth-child(4) { animation-delay: 0.4s; }

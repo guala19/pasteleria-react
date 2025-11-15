@@ -1,22 +1,84 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import "../styles/cart-panel.css";
 
+/**
+ * CartPanel Component
+ * 
+ * Panel deslizable que muestra el carrito de compras con funcionalidades de:
+ * - Visualización de items en carrito
+ * - Ajuste de cantidades
+ * - Aplicación de códigos promocionales
+ * - Proceder al checkout
+ * 
+ * @component
+ * @returns {React.ReactElement} Panel carrito deslizable
+ */
 export default function CartPanel() {
   const { items, updateQty, removeIndex, clear, totals, MONEDA, promo, setPromo, count } = useCart();
   const [promoCode, setPromoCode] = useState(promo?.codigo ?? "");
+  const [promoLoading, setPromoLoading] = useState(false);
+  const [promoMessage, setPromoMessage] = useState("");
+  const [promoError, setPromoError] = useState("");
   const navigate = useNavigate();
 
   const subtotal = totals?.subtotal ?? totals?.subTotal ?? 0;
   const descuentos = totals?.descuentos ?? totals?.discounts ?? 0;
   const total = totals?.total ?? subtotal - descuentos ?? subtotal;
 
-  function aplicarPromo() { setPromo(prev => ({ ...prev, codigo: promoCode })); }
-  function handlePagar() { 
-    closeCart();
-    navigate("/pedidos"); 
+  /**
+   * Aplica código promocional con validación
+   */
+  function aplicarPromo() {
+    // Validar que el código no esté vacío
+    if (!promoCode.trim()) {
+      setPromoError("Ingresa un código promocional");
+      setPromoMessage("");
+      return;
+    }
+
+    setPromoLoading(true);
+    setPromoError("");
+    setPromoMessage("");
+
+    // Simular delay de validación (en realidad sería una API call)
+    setTimeout(() => {
+      try {
+        // Validar longitud mínima
+        if (promoCode.trim().length < 3) {
+          throw new Error("El código debe tener al menos 3 caracteres");
+        }
+
+        setPromo(prev => ({ ...prev, codigo: promoCode.trim() }));
+        setPromoMessage(`✅ Código "${promoCode}" aplicado correctamente`);
+        setPromoCode("");
+      } catch (error) {
+        setPromoError(error.message || "Error al aplicar el código");
+      } finally {
+        setPromoLoading(false);
+      }
+    }, 500);
   }
+
+  /**
+   * Navega al checkout con validación
+   */
+  function handlePagar() {
+    // Validar que el carrito no esté vacío
+    if (items.length === 0) {
+      setPromoError("Tu carrito está vacío");
+      return;
+    }
+
+    closeCart();
+    navigate("/checkout");
+  }
+
+  /**
+   * Cierra el panel del carrito
+   */
   function closeCart() { 
     const panel = document.querySelector(".cart-panel-redesigned");
     const backdrop = document.querySelector(".cart-backdrop");
@@ -183,3 +245,25 @@ export default function CartPanel() {
     </>
   );
 }
+
+/**
+ * PropTypes validation para CartPanel
+ * Define los tipos de propiedades esperadas por el Context
+ */
+CartPanel.propTypes = {
+  // El componente usa useCart() hook, por lo que sus tipos son:
+  // items: PropTypes.arrayOf(PropTypes.object),
+  // updateQty: PropTypes.func,
+  // removeIndex: PropTypes.func,
+  // clear: PropTypes.func,
+  // totals: PropTypes.object,
+  // MONEDA: PropTypes.any,
+  // promo: PropTypes.object,
+  // setPromo: PropTypes.func,
+  // count: PropTypes.number,
+};
+
+CartPanel.defaultProps = {
+  // Los valores por defecto vienen del Context CartContext
+};
+

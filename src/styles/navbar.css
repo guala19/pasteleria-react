@@ -1,0 +1,583 @@
+/* ========================================
+   NAVBAR PROFESIONAL - PASTELERÍA MIL SABORES
+   ======================================== */
+
+/* Variables de color (reutilizables) */
+:root {
+  --color-cream: #FFF5E1;
+  --color-brown-dark: #5D4037;
+  --color-brown-primary: #6b4423;
+  --color-chocolate: #8B4513;
+  --color-gold: #d4a574;
+  --color-shadow-light: rgba(0, 0, 0, 0.08);
+  --color-text-light: #f5ede0;
+}
+
+/* ========================================
+   NAVBAR GENERAL (Desktop & Mobile)
+   ======================================== */
+
+.navbar-professional {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: var(--color-cream);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px var(--color-shadow-light);
+  z-index: 999;
+  font-family: 'Lato', sans-serif;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+/* ========================================
+   COLUMNA IZQUIERDA: LOGO
+   ======================================== */
+
+.navbar-left {
+  flex-shrink: 0;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.navbar-logo:hover {
+  transform: scale(1.05);
+  opacity: 0.85;
+}
+
+.navbar-logo-icon {
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.navbar-logo-text {
+  font-family: 'Pacifico', cursive;
+  font-size: 1.25rem;
+  color: var(--color-brown-primary);
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+/* ========================================
+   COLUMNA CENTRAL: ENLACES DE NAVEGACIÓN (Desktop)
+   ======================================== */
+
+.navbar-center {
+  display: flex;
+  gap: 2.5rem;
+  flex: 1;
+  justify-content: center;
+}
+
+.navbar-link {
+  text-decoration: none;
+  color: var(--color-brown-dark);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  position: relative;
+  transition: all 0.3s ease;
+  padding: 0.5rem 0;
+}
+
+/* Efecto hover: línea decorativa */
+.navbar-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-chocolate);
+  transition: width 0.3s ease;
+}
+
+.navbar-link:hover {
+  color: var(--color-chocolate);
+}
+
+.navbar-link:hover::after {
+  width: 100%;
+}
+
+/* Estado activo: mantiene el hover cuando estás en esa página */
+.navbar-link.active {
+  color: var(--color-chocolate);
+}
+
+.navbar-link.active::after {
+  width: 100%;
+}
+
+/* ========================================
+   COLUMNA DERECHA: ICONOS DE ACCIÓN
+   ======================================== */
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-shrink: 0;
+}
+
+/* Botones de icono general */
+.navbar-icon-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--color-brown-dark);
+  transition: all 0.3s ease;
+  padding: 0.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.navbar-icon-btn:hover {
+  transform: scale(1.15);
+  background-color: rgba(107, 68, 35, 0.08);
+  color: var(--color-chocolate);
+}
+
+/* Botón de búsqueda específico */
+.navbar-search-container {
+  position: relative;
+}
+
+.search-btn {
+  z-index: 10;
+}
+
+/* Barra de búsqueda desplegable */
+.navbar-search-bar {
+  position: absolute;
+  top: 100%;
+  right: -1rem;
+  margin-top: 0.5rem;
+  background-color: white;
+  border: 1px solid var(--color-gold);
+  border-radius: 8px;
+  padding: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  box-shadow: 0 4px 12px var(--color-shadow-light);
+  z-index: 100;
+  min-width: 250px;
+}
+
+.navbar-search-input {
+  flex: 1;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+  color: var(--color-brown-dark);
+}
+
+.navbar-search-input::placeholder {
+  color: rgba(93, 64, 55, 0.5);
+}
+
+.navbar-search-submit {
+  background-color: var(--color-chocolate);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-search-submit:hover {
+  background-color: #6b3410;
+}
+
+/* Badge del carrito */
+.navbar-badge {
+  position: absolute;
+  top: -0.5rem;
+  right: -0.5rem;
+  background-color: var(--color-chocolate);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--color-cream);
+  box-shadow: 0 2px 4px var(--color-shadow-light);
+}
+
+/* ========================================
+   MENÚ HAMBURGUESA (Oculto en Desktop)
+   ======================================== */
+
+.navbar-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  gap: 0.4rem;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hamburger-line {
+  width: 1.5rem;
+  height: 2px;
+  background-color: var(--color-brown-dark);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* ========================================
+   MENÚ MÓVIL (Oculto en Desktop)
+   ======================================== */
+
+.navbar-mobile-backdrop {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+}
+
+.navbar-mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 75%;
+  max-width: 300px;
+  height: 100vh;
+  background-color: white;
+  box-shadow: 2px 0 8px var(--color-shadow-light);
+  z-index: 999;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* Header del menú móvil */
+.navbar-mobile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: var(--color-cream);
+}
+
+.navbar-mobile-header h3 {
+  font-size: 1.25rem;
+  color: var(--color-brown-primary);
+  margin: 0;
+  font-family: 'Pacifico', cursive;
+}
+
+.navbar-mobile-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--color-brown-dark);
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.navbar-mobile-close:active {
+  transform: scale(0.9);
+}
+
+/* Enlaces del menú móvil */
+.navbar-mobile-links {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+  flex: 1;
+}
+
+.navbar-mobile-link {
+  text-decoration: none;
+  color: var(--color-brown-dark);
+  font-size: 1rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.navbar-mobile-link:active {
+  background-color: rgba(107, 68, 35, 0.1);
+  color: var(--color-chocolate);
+}
+
+/* Estado activo en mobile: mantiene el color cuando estás en esa página */
+.navbar-mobile-link.active {
+  background-color: rgba(107, 68, 35, 0.1);
+  color: var(--color-chocolate);
+}
+
+.navbar-mobile-divider {
+  margin: 0.5rem 0;
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Búsqueda en menú móvil */
+.navbar-mobile-search {
+  padding: 1rem;
+}
+
+.navbar-mobile-search form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.navbar-mobile-search-input {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid var(--color-gold);
+  border-radius: 4px;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.9rem;
+  color: var(--color-brown-dark);
+  outline: none;
+}
+
+.navbar-mobile-search-btn {
+  padding: 0.5rem 1rem;
+  background-color: var(--color-chocolate);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Lato', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-mobile-search-btn:active {
+  background-color: #6b3410;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+/* Tablets (768px - 1024px) */
+@media (max-width: 1024px) {
+  .navbar-container {
+    padding: 0.75rem 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .navbar-center {
+    gap: 1.5rem;
+  }
+
+  .navbar-link {
+    font-size: 0.95rem;
+  }
+
+  .navbar-logo-text {
+    font-size: 1.1rem;
+  }
+}
+
+/* Móviles (< 768px) */
+@media (max-width: 768px) {
+  .navbar-container {
+    padding: 0.75rem 1rem;
+    gap: 1rem;
+  }
+
+  /* Ocultar columna central (Enlaces) */
+  .navbar-center {
+    display: none;
+  }
+
+  /* Mostrar búsqueda en móvil (solo icono) */
+  .navbar-right {
+    gap: 0.75rem;
+  }
+
+  .navbar-search-bar {
+    display: none;
+  }
+
+  .navbar-search-bar.active {
+    display: flex;
+    min-width: 100vw;
+  }
+
+  /* Mostrar hamburguesa */
+  .navbar-hamburger {
+    display: flex;
+  }
+
+  /* Logo más pequeño en móvil */
+  .navbar-logo-text {
+    font-size: 1rem;
+  }
+
+  .navbar-logo-icon {
+    font-size: 1.5rem;
+  }
+
+  /* Mostrar menú móvil cuando está activo */
+  .navbar-mobile-backdrop.active {
+    display: block;
+  }
+
+  .navbar-mobile-menu.active {
+    display: flex;
+  }
+}
+
+/* Móviles muy pequeños (< 480px) */
+@media (max-width: 480px) {
+  .navbar-container {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .navbar-logo-text {
+    display: none;
+  }
+
+  .navbar-logo-icon {
+    font-size: 1.25rem;
+  }
+
+  .navbar-icon-btn {
+    font-size: 1.25rem;
+    padding: 0.25rem;
+  }
+
+  .navbar-badge {
+    width: 1.25rem;
+    height: 1.25rem;
+    font-size: 0.65rem;
+    top: -0.25rem;
+    right: -0.25rem;
+  }
+
+  .navbar-mobile-menu {
+    width: 85%;
+  }
+
+  .navbar-mobile-header h3 {
+    font-size: 1rem;
+  }
+
+  .navbar-mobile-link {
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* ========================================
+   ANIMACIONES
+   ======================================== */
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.navbar-mobile-menu {
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.navbar-mobile-backdrop {
+  animation: fadeIn 0.3s ease;
+}
+
+/* ========================================
+   ANIMACIÓN: LA SACUDIDA DULCE (Carrito)
+   ======================================== */
+
+@keyframes shakeCart {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-15deg);
+  }
+  50% {
+    transform: rotate(15deg);
+  }
+  75% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes badgeBounce {
+  0% {
+    transform: translateY(-5px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.shake-animation {
+  animation: shakeCart 0.6s ease-in-out;
+}
+
+.shake-animation .navbar-badge {
+  animation: badgeBounce 0.4s ease-out 0.2s;
+}

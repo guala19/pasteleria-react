@@ -1,24 +1,35 @@
-// src/App.jsx
 import React, { Suspense, useEffect } from "react";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
-// 🧭 Componentes base
 import Navbar from "./components/Navbar.jsx";
 import HomeComplete from "./components/HomeComplete.jsx";
-import Login from "./components/Login.jsx";
+import Footer from "./components/Footer.jsx";
 import Cuentas from "./components/Cuentas.jsx";
-import CatalogSimple from "./components/CatalogSimple.jsx";
 import CategoriesNew from "./components/CategoriesNew.jsx";
 import CategoryView from "./pages/CategoryView.jsx";
-import Categories from "./pages/categorias.jsx";
-
-// 🛒 Componentes CORE
-import Product from "./pages/Product.jsx";
-import ProductNew from "./pages/ProductNew.jsx";
 import EnviosTracker from "./components/EnviosTracker.jsx";
 import CartPanel from "./components/CartPanel.jsx";
 import CarritoCompraPage from "./pages/CarritoCompraPage.jsx";
-import Pedidos from "./pages/Pedidos.jsx"; // 👈 asegúrate de tenerlo
+import Pedidos from "./pages/Pedidos.jsx";
+import Catalog from "./pages/Catalog.jsx";
+import DetalleProducto from "./pages/DetalleProducto.jsx";
+import Checkout from "./pages/Checkout.jsx";
+import PagoCorrecto from "./pages/PagoCorrecto.jsx";
+import PagoError from "./pages/PagoError.jsx";
+import LoginPage from "./pages/AdminLogin.jsx";
+import Registro from "./pages/Registro.jsx";
+import MiPerfil from "./pages/MiPerfil.jsx";
+import NuestraHistoria from "./pages/NuestraHistoria.jsx";
+import Contacto from "./pages/Contacto.jsx";
+
+// Admin Pages
+import AdminDashboard from "./admin/pages/AdminDashboard.jsx";
+import AdminOrdenes from "./admin/pages/AdminOrdenes.jsx";
+import AdminProductos from "./admin/pages/AdminProductos.jsx";
+import AdminUsuarios from "./admin/pages/AdminUsuarios.jsx";
+import AdminPerfil from "./admin/pages/AdminPerfil.jsx";
 
 import { useCart } from "./context/CartContext.jsx";
 import "./App.css";
@@ -27,7 +38,6 @@ export default function App() {
   const { count } = useCart();
   const navigate = useNavigate();
 
-  // 🧾 Manejar apertura/cierre del panel del carrito
   useEffect(() => {
     const handleCartToggle = () => {
       const panel = document.querySelector(".cart-panel-redesigned");
@@ -53,34 +63,42 @@ export default function App() {
   }, []);
 
   return (
-    <div className="app-root d-flex flex-column min-vh-100">
-      {/* 🌐 NAVBAR GLOBAL - Siempre visible */}
-      <Navbar />
+    <AuthProvider>
+      <div className="app-root d-flex flex-column min-vh-100" style={{ position: 'relative' }}>
+        <Navbar />
       
-      {/* 🌐 Enrutamiento principal */}
-      <main className="flex-grow-1" style={{ backgroundColor: '#FFF5E1' }}>
-        <div className="container py-4" style={{ backgroundColor: '#FFF5E1' }}>
+        <main className="flex-grow-1" style={{ backgroundColor: '#FFF5E1' }}>
           <Suspense fallback={<div className="text-center p-5">Cargando...</div>}>
             <Routes>
-              {/* Rutas base */}
               <Route path="/" element={<HomeComplete />} />
-              <Route path="/login" element={<Login />} />
               <Route path="/cuentas" element={<Cuentas />} />
-
-              {/* Catálogo */}
-              <Route path="/catalogo" element={<CatalogSimple />} />
+              <Route path="/catalogo" element={<Catalog />} />
+              <Route path="/productos" element={<Catalog />} />
+              <Route path="/producto/:code" element={<DetalleProducto />} />
               <Route path="/categorias" element={<CategoriesNew />} />
               <Route path="/categoria/:category" element={<CategoryView />} />
-              <Route path="/producto/:code" element={<ProductNew />} />
-
-              {/* 🛒 Carrito / Pedidos */}
               <Route path="/carrito" element={<CarritoCompraPage />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/pago-correcto" element={<PagoCorrecto />} />
+              <Route path="/pago-error" element={<PagoError />} />
               <Route path="/pedidos" element={<Pedidos />} />
-
-              {/* 🚚 Envíos */}
               <Route path="/envios" element={<EnviosTracker />} />
+              <Route path="/perfil" element={<MiPerfil />} />
+              <Route path="/historia" element={<NuestraHistoria />} />
+              <Route path="/contacto" element={<Contacto />} />
 
-              {/* 🛑 Ruta por defecto */}
+              {/* Authentication Routes */}
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/registro" element={<Registro />} />
+              <Route path="/admin/login" element={<LoginPage />} />
+
+              {/* Protected Admin Routes */}
+              <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+              <Route path="/admin/ordenes" element={<ProtectedRoute><AdminOrdenes /></ProtectedRoute>} />
+              <Route path="/admin/productos" element={<ProtectedRoute><AdminProductos /></ProtectedRoute>} />
+              <Route path="/admin/usuarios" element={<ProtectedRoute><AdminUsuarios /></ProtectedRoute>} />
+              <Route path="/admin/perfil" element={<ProtectedRoute><AdminPerfil /></ProtectedRoute>} />
+
               <Route
                 path="*"
                 element={
@@ -95,23 +113,21 @@ export default function App() {
               />
             </Routes>
           </Suspense>
-        </div>
-      </main>
+        </main>
 
-      {/* 🛒 Panel del carrito redesignado */}
-      {(() => {
-        try {
-          return <CartPanel />;
-        } catch (err) {
-          console.error("Error en CartPanel:", err);
-          return null;
-        }
-      })()}
+        {/* 🛒 Panel del carrito redesignado */}
+        {(() => {
+          try {
+            return <CartPanel />;
+          } catch (err) {
+            console.error("Error en CartPanel:", err);
+            return null;
+          }
+        })()}
 
-      {/* 📌 Footer */}
-      <footer className="text-center text-muted small py-3 border-top bg-white mt-auto">
-        © 2025 Pastelería 1000 Sabores
-      </footer>
-    </div>
+        {/* 📌 Footer */}
+        <Footer />
+      </div>
+    </AuthProvider>
   );
 }

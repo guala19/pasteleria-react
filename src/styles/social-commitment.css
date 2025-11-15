@@ -1,0 +1,186 @@
+/* ============================================
+   SOCIAL COMMITMENT - Sección Compromiso Social
+   ============================================ */
+
+.social-commitment {
+  background-color: #FFF5E1;
+  padding: 4rem 2rem;
+  width: 100%;
+}
+
+.social-commitment-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+/* ==================== COLUMNA IZQUIERDA: CONTENIDO ==================== */
+
+.social-commitment-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Título de la Sección */
+.social-commitment-title {
+  font-family: 'Pacifico', cursive;
+  font-size: 2.8rem;
+  font-weight: 400;
+  color: #5D4037;
+  line-height: 1.3;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+/* Párrafos de Texto */
+.social-commitment-text {
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  color: #5D4037;
+  line-height: 1.8;
+  margin: 0;
+  text-align: justify;
+}
+
+.social-commitment-text:first-of-type {
+  margin-top: 0.5rem;
+}
+
+/* Botón de Acción */
+.social-commitment-button {
+  align-self: flex-start;
+  background-color: #8B4513;
+  color: #FFF5E1;
+  border: none;
+  padding: 0.9rem 1.8rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.social-commitment-button:hover {
+  background-color: #6b3410;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 69, 19, 0.3);
+}
+
+.social-commitment-button:active {
+  transform: translateY(0);
+}
+
+/* ==================== COLUMNA DERECHA: IMAGEN ==================== */
+
+.social-commitment-image {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.social-commitment-img {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(93, 64, 55, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.social-commitment-img:hover {
+  transform: scale(1.02);
+}
+
+/* ==================== RESPONSIVIDAD ==================== */
+
+/* Tablet: 768px - 1024px */
+@media (max-width: 1024px) and (min-width: 768px) {
+  .social-commitment-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+
+  .social-commitment-title {
+    font-size: 2.2rem;
+  }
+
+  .social-commitment-text {
+    font-size: 0.95rem;
+  }
+
+  .social-commitment {
+    padding: 3rem 2rem;
+  }
+}
+
+/* Mobile: Menos de 768px */
+@media (max-width: 767px) {
+  .social-commitment {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .social-commitment-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .social-commitment-title {
+    font-size: 1.8rem;
+  }
+
+  .social-commitment-text {
+    font-size: 0.9rem;
+    text-align: left;
+  }
+
+  .social-commitment-button {
+    align-self: center;
+    font-size: 0.9rem;
+    padding: 0.8rem 1.6rem;
+  }
+
+  .social-commitment-img {
+    max-height: 350px;
+  }
+}
+
+/* Mobile pequeño: Menos de 480px */
+@media (max-width: 479px) {
+  .social-commitment {
+    padding: 2rem 1rem;
+  }
+
+  .social-commitment-container {
+    gap: 1.5rem;
+  }
+
+  .social-commitment-title {
+    font-size: 1.5rem;
+  }
+
+  .social-commitment-text {
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+
+  .social-commitment-button {
+    font-size: 0.8rem;
+    padding: 0.7rem 1.4rem;
+  }
+
+  .social-commitment-img {
+    max-height: 280px;
+  }
+}

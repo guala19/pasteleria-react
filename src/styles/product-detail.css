@@ -326,18 +326,108 @@
   cursor: pointer;
   transition: all var(--transition-fast);
   font-family: "Lato", sans-serif;
+  position: relative;
+  overflow: hidden;
 }
 
 .btn-add-to-cart {
-  background-color: var(--pink-accent);
+  background-color: var(--chocolate);
   color: white;
-  box-shadow: 0 4px 12px rgba(255, 192, 203, 0.4);
+  box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
-.btn-add-to-cart:hover {
-  background-color: #FFB0C1;
-  box-shadow: 0 6px 16px rgba(255, 192, 203, 0.6);
+.btn-add-to-cart:hover:not(:disabled) {
+  background-color: var(--chocolate-dark);
+  box-shadow: 0 6px 16px rgba(139, 69, 19, 0.4);
   transform: translateY(-2px);
+}
+
+.btn-add-to-cart:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.btn-add-to-cart:disabled {
+  opacity: 0.9;
+  cursor: not-allowed;
+}
+
+/* Textos dentro del botón */
+.btn-text-original,
+.btn-text-success {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-text-success {
+  position: absolute;
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+/* ANIMACIÓN: Botón Satisfecho */
+.btn-add-to-cart.btn-add-satisfied {
+  background-color: var(--pink-accent);
+  color: var(--chocolate-dark);
+  animation: satisfiedPulse 1.5s ease forwards;
+}
+
+.btn-add-to-cart.btn-add-satisfied .btn-text-original {
+  animation: textOutSatisfied 0.3s ease forwards;
+}
+
+.btn-add-to-cart.btn-add-satisfied .btn-text-success {
+  animation: textInSatisfied 0.3s ease forwards;
+}
+
+@keyframes satisfiedPulse {
+  0% {
+    background-color: var(--chocolate);
+    color: white;
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(0.95);
+  }
+  20% {
+    background-color: var(--pink-accent);
+    color: var(--chocolate-dark);
+    transform: scale(1.02);
+  }
+  100% {
+    background-color: var(--chocolate);
+    color: white;
+    transform: scale(1);
+  }
+}
+
+@keyframes textOutSatisfied {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+}
+
+@keyframes textInSatisfied {
+  0% {
+    opacity: 0;
+    transform: translateX(10px) scale(0.8);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
 }
 
 .btn-personalize {
@@ -613,7 +703,13 @@
 }
 
 /* ================================================================
-   ANIMATIONS
+   ANIMACIONES DEL BOTÓN "EL BOTÓN SATISFECHO"
+   ================================================================ */
+
+/* Las animaciones para el botón satisfecho se encuentran en la sección ACTION BUTTONS */
+
+/* ================================================================
+   ANIMACIONES
    ================================================================ */
 
 @keyframes fadeIn {

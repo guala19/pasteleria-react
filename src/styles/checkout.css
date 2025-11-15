@@ -1,0 +1,148 @@
+.checkout-container {
+  padding: 2rem 0;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.checkout-container h1 {
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+/* Formulario */
+.card {
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.card-title {
+  font-weight: 700;
+  color: #333;
+  font-size: 1.25rem;
+}
+
+/* Inputs */
+.form-label {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.form-control, .form-select {
+  border: 2px solid #e0e0e0;
+  border-radius: 5px;
+  padding: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+.is-invalid {
+  border-color: #dc3545 !important;
+}
+
+.invalid-feedback {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+/* Botones */
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+}
+
+.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.btn-outline-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Resumen de Orden */
+.checkout-items {
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 1rem;
+}
+
+.checkout-item {
+  padding-bottom: 1rem;
+  margin-bottom: 0;
+}
+
+.checkout-item h6 {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.25rem;
+}
+
+.checkout-item small {
+  color: #666;
+}
+
+/* Totales */
+.checkout-totals {
+  background-color: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 5px;
+}
+
+.checkout-totals > div {
+  padding: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.checkout-total {
+  font-size: 1.25rem;
+  padding: 1rem 0 0 0 !important;
+}
+
+.checkout-total strong {
+  font-size: 1.5rem;
+}
+
+/* Sticky */
+@media (min-width: 992px) {
+  .sticky-top {
+    position: sticky;
+    top: 100px;
+    z-index: 10;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .checkout-container {
+    padding: 1rem 0;
+  }
+
+  .row.g-4 {
+    gap: 1.5rem !important;
+  }
+
+  .card {
+    margin-bottom: 2rem;
+  }
+
+  .checkout-items {
+    max-height: none;
+    padding-right: 0;
+  }
+}
